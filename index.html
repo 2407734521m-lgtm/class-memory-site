@@ -1,151 +1,908 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="aurora">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#111329">
-<title>拾光 · 班级纪念馆</title>
+<meta name="theme-color" content="#070912">
+<title>我们的班级 · 青春档案</title>
 <style>
-:root{--bg:#0b1020;--glass:rgba(255,255,255,.085);--line:rgba(255,255,255,.15);--text:#f5f5ff;--muted:#b7bdd8;--pink:#c084fc;--blue:#60a5fa;--mint:#5eead4}
-*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 10% 0%,#3b1d69 0,transparent 38%),radial-gradient(ellipse at 95% 15%,#123c70 0,transparent 34%),linear-gradient(145deg,#090d1c,#111329 55%,#17112a);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:radial-gradient(#fff 0.7px,transparent .7px);background-size:24px 24px}
-button,input,textarea,select{font:inherit}button{cursor:pointer}.wrap{max-width:1120px;margin:auto;padding:20px 16px 60px;position:relative}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.04em}.logo{width:42px;height:42px;border-radius:15px;background:linear-gradient(135deg,var(--pink),var(--blue));display:grid;place-items:center;box-shadow:0 8px 30px #8b5cf655;font-size:21px}.pill,.btn{border:1px solid var(--line);border-radius:999px;padding:10px 15px;color:var(--text);background:rgba(255,255,255,.08);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}.btn.primary{border:0;background:linear-gradient(110deg,#8b5cf6,#3b82f6);font-weight:700;box-shadow:0 8px 26px #6366f144}.btn.danger{background:#7f1d1d88}.btn:disabled{opacity:.5;cursor:not-allowed}.hero{padding:34px 24px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.035));box-shadow:0 22px 80px #0003;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);overflow:hidden;position:relative}.hero:after{content:"";position:absolute;width:230px;height:230px;border-radius:50%;background:#a855f744;filter:blur(55px);right:-60px;top:-90px;pointer-events:none}.eyebrow{color:var(--mint);font-size:12px;letter-spacing:.18em;font-weight:800}.hero h1{font-size:clamp(30px,7vw,56px);line-height:1.08;margin:12px 0;background:linear-gradient(100deg,#fff,#c4b5fd 48%,#7dd3fc);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{color:var(--muted);max-width:640px;line-height:1.8;margin-bottom:20px}.actions{display:flex;flex-wrap:wrap;gap:10px}.section{margin-top:28px}.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:14px}.sectionhead h2{font-size:21px;margin:0}.sub{font-size:13px;color:var(--muted);margin-top:5px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:14px}.glass{border:1px solid var(--line);border-radius:22px;background:var(--glass);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 15px 50px #0002}.person{padding:14px;cursor:pointer;transition:transform .25s,border-color .25s,background .25s;animation:rise .5s both}.person:hover{transform:translateY(-5px);border-color:#c4b5fd88;background:rgba(255,255,255,.12)}.avatar{width:100%;aspect-ratio:1.35;object-fit:cover;border-radius:16px;background:linear-gradient(135deg,#312e81,#0e7490);display:block}.person h3{margin:13px 0 4px;font-size:17px}.person p{margin:0;color:var(--muted);font-size:13px;line-height:1.6;min-height:38px}.tag{display:inline-flex;margin-top:10px;border-radius:99px;padding:5px 9px;font-size:11px;color:#ddd6fe;background:#8b5cf622;border:1px solid #c4b5fd30}.empty{padding:28px;text-align:center;color:var(--muted)}.search{width:100%;max-width:260px}.field{display:grid;gap:7px;margin:12px 0}.field label{font-size:13px;color:#d8d9ed}.field input,.field textarea,.field select,.search input{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px 13px;background:#0b1020aa;color:var(--text);outline:none}.field textarea{min-height:90px;resize:vertical}.field input:focus,.field textarea:focus{border-color:#a78bfa;box-shadow:0 0 0 3px #8b5cf622}.muted{color:var(--muted)}.small{font-size:12px;color:var(--muted);line-height:1.6}.notice{border:1px solid #fbbf2440;background:#f59e0b12;color:#fde68a;padding:12px 14px;border-radius:14px;font-size:13px;line-height:1.6;margin:14px 0}.modal{position:fixed;inset:0;background:#050716bb;backdrop-filter:blur(10px);z-index:10;display:none;align-items:center;justify-content:center;padding:16px;overflow:auto}.modal.open{display:flex;animation:fade .2s}.dialog{width:min(720px,100%);max-height:92vh;overflow:auto;padding:22px;border-radius:26px;border:1px solid var(--line);background:linear-gradient(145deg,#1c2040f5,#111329f5);box-shadow:0 25px 100px #0008;animation:pop .28s}.dialog h2{margin:0 0 6px}.dialoghead{display:flex;justify-content:space-between;align-items:start;gap:12px}.x{border:1px solid var(--line);background:#ffffff12;color:white;border-radius:50%;width:36px;height:36px;font-size:20px}.profile-layout{display:grid;grid-template-columns:minmax(140px, .7fr) 1.3fr;gap:18px;margin-top:18px}.profile-photo{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:18px;background:#27254c}.profile-info{display:flex;flex-direction:column;gap:10px}.profile-info p{white-space:pre-wrap;line-height:1.7;color:#d4d6eb;margin:0}.checkrow{display:flex;align-items:center;gap:9px;font-size:13px;color:#d7d9ef;margin:8px 0}.checkrow input{accent-color:#a78bfa}.divider{height:1px;background:var(--line);margin:16px 0}.toast{position:fixed;bottom:18px;left:50%;transform:translate(-50%,20px);opacity:0;z-index:30;background:#202544;border:1px solid var(--line);padding:12px 16px;border-radius:14px;max-width:90vw;transition:.25s;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}.hidden{display:none!important}.footer{text-align:center;color:#8e95b8;font-size:12px;margin-top:38px}.admin-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.admin-row:last-child{border:0}@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes fade{from{opacity:0}to{opacity:1}}@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}@media(max-width:600px){.hero{padding:26px 18px}.top{align-items:flex-start}.top .actions{justify-content:flex-end}.profile-layout{grid-template-columns:1fr}.profile-photo{aspect-ratio:16/9;max-height:260px}.sectionhead{align-items:start;flex-direction:column}.search{max-width:none}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.person{padding:9px;border-radius:18px}.person h3{font-size:15px}.person p{font-size:12px}.wrap{padding-inline:12px}}
+/* ============ 设计系统 ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg0:#070912; --bg1:#0d1224;
+  --txt:#f4f5fb; --mut:#a7aec9; --dim:#6b7390;
+  --card:rgba(255,255,255,.055); --card2:rgba(255,255,255,.09);
+  --line:rgba(255,255,255,.11); --line2:rgba(255,255,255,.2);
+  --acc:#a78bfa; --acc2:#60a5fa;
+  --ok:#34d399; --warn:#fbbf24; --bad:#f87171;
+  --r:20px; --rs:14px;
+  --sh:0 12px 40px rgba(0,0,0,.45);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+}
+[data-theme="sunset"]{--acc:#fb923c;--acc2:#f472b6}
+[data-theme="forest"]{--acc:#34d399;--acc2:#a3e635}
+[data-theme="mono"]{--acc:#e5e7eb;--acc2:#9ca3af}
+[data-theme="starry"]{--acc:#818cf8;--acc2:#38bdf8}
+[data-theme="ocean"]{--acc:#38bdf8;--acc2:#2dd4bf}
+[data-theme="custom"]{--acc:var(--custom,#a78bfa);--acc2:var(--custom2,#60a5fa)}
+html{scrollbar-width:thin;scrollbar-color:#2a3350 transparent}
+body{background:var(--bg0);color:var(--txt);font-family:var(--font);min-height:100vh;min-height:100dvh;overflow-x:hidden;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer;border:none;background:none}
+input,textarea,select{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:var(--rs);padding:13px 15px;width:100%;outline:none;transition:border-color .25s,box-shadow .25s;font-size:16px}
+input:focus,textarea:focus{border-color:var(--acc);box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 22%,transparent)}
+textarea{resize:vertical;min-height:96px}
+::placeholder{color:var(--dim)}
+img{display:block;max-width:100%}
+a{color:var(--acc)}
+
+/* 背景光晕 */
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bg i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;animation:drift 22s ease-in-out infinite alternate}
+.bg i:nth-child(1){width:52vmax;height:52vmax;left:-14vmax;top:-16vmax;background:radial-gradient(circle,color-mix(in srgb,var(--acc) 55%,transparent),transparent 70%)}
+.bg i:nth-child(2){width:44vmax;height:44vmax;right:-12vmax;top:22vh;background:radial-gradient(circle,color-mix(in srgb,var(--acc2) 45%,transparent),transparent 70%);animation-delay:-8s}
+.bg i:nth-child(3){width:40vmax;height:40vmax;left:8vw;bottom:-18vmax;background:radial-gradient(circle,rgba(244,114,182,.28),transparent 70%);animation-delay:-14s}
+@keyframes drift{to{transform:translate(6vmax,4vmax) scale(1.12)}}
+.bg::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.5) .7px,transparent .7px);background-size:26px 26px;opacity:.05}
+
+/* 布局 */
+#app{max-width:520px;margin:0 auto;min-height:100vh;min-height:100dvh;position:relative;padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+.view{padding:18px 16px 8px;animation:viewIn .5s var(--ease)}
+@keyframes viewIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.stagger>*{opacity:0;animation:riseIn .55s var(--ease) forwards;animation-delay:var(--d,0s)}
+@keyframes riseIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* 顶栏 */
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:12px;padding:14px 16px;background:color-mix(in srgb,var(--bg0) 72%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--line);margin:0 -16px 18px}
+.topbar h1{font-size:18px;font-weight:800;letter-spacing:.03em;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.backbtn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--card);border:1px solid var(--line);font-size:18px;transition:transform .2s;flex:none}
+.backbtn:active{transform:scale(.9)}
+
+/* 底部导航 */
+.tabbar{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:520px;z-index:40;display:flex;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg0) 78%,transparent);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--line)}
+.tabbar button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:14px;color:var(--dim);font-size:11px;transition:color .25s,background .25s;min-height:56px}
+.tabbar button .ic{font-size:21px;line-height:1}
+.tabbar button.on{color:var(--acc);background:color-mix(in srgb,var(--acc) 12%,transparent)}
+
+/* 组件 */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:var(--sh)}
+.pad{padding:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:700;font-size:15px;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#0a0c16;border:none;box-shadow:0 8px 26px color-mix(in srgb,var(--acc) 38%,transparent);transition:transform .18s,box-shadow .25s,filter .25s;width:100%}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:var(--card);color:var(--txt);border:1px solid var(--line2);box-shadow:none}
+.btn.danger{background:linear-gradient(135deg,#f87171,#ef4444);color:#fff;box-shadow:0 8px 26px rgba(248,113,113,.3)}
+.btn.sm{padding:9px 16px;font-size:13px;width:auto}
+.btn:disabled{opacity:.5;filter:grayscale(.4)}
+.chip{display:inline-flex;align-items:center;padding:7px 14px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-size:13px;color:var(--mut);transition:all .25s}
+.chip.on{background:color-mix(in srgb,var(--acc) 18%,transparent);border-color:var(--acc);color:var(--txt)}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;color:var(--mut);margin-bottom:8px;font-weight:600}
+.hint{font-size:12.5px;color:var(--dim);margin-top:8px;line-height:1.6}
+.err{background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.4);color:#fca5a5;padding:12px 15px;border-radius:var(--rs);font-size:14px;margin-bottom:16px;animation:viewIn .3s var(--ease)}
+.okmsg{background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.4);color:#6ee7b7;padding:12px 15px;border-radius:var(--rs);font-size:14px;margin-bottom:16px}
+.divider{display:flex;align-items:center;gap:12px;color:var(--dim);font-size:12px;margin:22px 0}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.secttl{font-size:15px;font-weight:800;margin:26px 0 12px;display:flex;align-items:center;gap:8px}
+.secttl::before{content:"";width:4px;height:16px;border-radius:2px;background:linear-gradient(var(--acc),var(--acc2))}
+
+/* 开关 */
+.switch{position:relative;width:52px;height:30px;flex:none;cursor:pointer}
+.switch input{position:absolute;opacity:0;width:100%;height:100%;cursor:pointer;margin:0;z-index:2}
+.switch .tr{position:absolute;inset:0;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid var(--line);transition:background .25s}
+.switch .th{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:transform .25s var(--ease);box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.switch input:checked~.tr{background:linear-gradient(135deg,var(--acc),var(--acc2))}
+.switch input:checked~.th{transform:translateX(22px)}
+.setrow{display:flex;align-items:center;gap:12px;padding:14px 4px;border-bottom:1px solid var(--line)}
+.setrow:last-child{border-bottom:none}
+.setrow .tx{flex:1;min-width:0}
+.setrow .tx b{display:block;font-size:15px;font-weight:600}
+.setrow .tx span{font-size:12.5px;color:var(--dim)}
+
+/* 认证页 */
+.authwrap{min-height:82vh;min-height:82dvh;display:flex;flex-direction:column;justify-content:center}
+.brandmark{text-align:center;margin-bottom:30px}
+.brandmark .logo{width:76px;height:76px;border-radius:26px;margin:0 auto 16px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;font-size:36px;box-shadow:0 14px 44px color-mix(in srgb,var(--acc) 45%,transparent);animation:float 5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px)}}
+.brandmark h2{font-size:26px;font-weight:800;letter-spacing:.04em}
+.brandmark p{color:var(--mut);font-size:14px;margin-top:8px}
+.segtabs{display:flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px;margin-bottom:24px}
+.segtabs button{flex:1;padding:11px;border-radius:999px;font-weight:700;font-size:14px;color:var(--dim);transition:all .3s}
+.segtabs button.on{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#0a0c16}
+
+/* 成员卡片 */
+.searchbar{position:sticky;top:64px;z-index:20;margin-bottom:14px}
+.searchbar input{border-radius:999px;padding:13px 18px 13px 44px;background:color-mix(in srgb,var(--bg0) 60%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.searchbar::before{content:"🔍";position:absolute;left:16px;top:50%;transform:translateY(-50%);opacity:.6;z-index:2}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mcard{position:relative;border-radius:var(--r);overflow:hidden;background:var(--card);border:1px solid var(--line);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s;will-change:transform}
+.mcard:active{transform:scale(.96)}
+.mcard .ph{aspect-ratio:3/3.4;overflow:hidden;background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 30%,#1a2140),#1a2140);position:relative}
+.mcard .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.mcard:active .ph img{transform:scale(1.06)}
+.mcard .ph .init{position:absolute;inset:0;display:grid;place-items:center;font-size:44px;font-weight:800;color:rgba(255,255,255,.35)}
+.mcard .meta{padding:12px 13px 14px}
+.mcard .meta b{font-size:15px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mcard .meta .tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.mcard .meta .tags span{font-size:11px;padding:4px 9px;border-radius:999px;background:color-mix(in srgb,var(--acc) 14%,transparent);color:var(--mut);white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.mcard .sig{font-size:12px;color:var(--dim);margin-top:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.5}
+.empty{text-align:center;color:var(--dim);padding:60px 20px;font-size:14px;line-height:2}
+
+/* FLIP 共享元素 */
+.flip-clone{position:fixed;z-index:100;pointer-events:none;object-fit:cover;border-radius:18px;will-change:transform,border-radius;box-shadow:var(--sh);margin:0}
+.flip-dim{position:fixed;inset:0;background:var(--bg0);z-index:90;pointer-events:none;opacity:0}
+
+/* 档案页 */
+.pf-cover{position:relative;border-radius:24px;overflow:hidden;margin-bottom:18px;min-height:320px;display:flex;align-items:flex-end;background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 32%,#141a35),#141a35)}
+.pf-cover img.bgph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pf-cover .shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,7,15,.94) 10%,transparent 62%)}
+.pf-cover .who{position:relative;padding:22px;z-index:2}
+.pf-cover .who h2{font-size:30px;font-weight:800;letter-spacing:.02em}
+.pf-cover .who .sub{color:var(--mut);margin-top:6px;font-size:14px}
+.pf-row{display:flex;gap:16px;align-items:flex-start;margin-bottom:18px}
+.pf-row .ph{width:128px;height:150px;border-radius:18px;object-fit:cover;flex:none;box-shadow:var(--sh);background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 30%,#1a2140),#1a2140)}
+.pf-row .who h2{font-size:24px;font-weight:800}
+.pf-center{text-align:center;margin-bottom:18px}
+.pf-center .ph{width:150px;height:175px;border-radius:22px;object-fit:cover;margin:0 auto 14px;box-shadow:var(--sh);background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 30%,#1a2140),#1a2140)}
+.pf-center h2{font-size:26px;font-weight:800}
+.kv{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.kv span{font-size:12.5px;padding:7px 13px;border-radius:999px;background:var(--card2);border:1px solid var(--line)}
+.sigline{font-size:16px;color:var(--txt);border-left:3px solid var(--acc);padding:4px 0 4px 14px;margin:16px 0;font-style:italic}
+.bio{font-size:14.5px;line-height:1.85;color:var(--mut);white-space:pre-wrap}
+
+/* 时间线 */
+.tl{position:relative;margin:8px 0 8px 8px;padding-left:26px}
+.tl::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;border-radius:2px;background:linear-gradient(var(--acc),var(--acc2),transparent)}
+.tl-year{font-weight:800;font-size:17px;margin:20px 0 6px;color:var(--acc);position:relative}
+.tl-year::before{content:"";position:absolute;left:-25px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px var(--acc)}
+.tl-item{position:relative;padding:12px 0}
+.tl-item::before{content:"";position:absolute;left:-24px;top:20px;width:8px;height:8px;border-radius:50%;background:var(--bg0);border:2px solid var(--acc2)}
+.tl-item .card{padding:15px}
+.tl-item h4{font-size:15px;margin-bottom:4px}
+.tl-item .dt{font-size:12px;color:var(--dim);margin-bottom:8px}
+.tl-item p{font-size:13.5px;color:var(--mut);line-height:1.7;white-space:pre-wrap}
+.tl-item img{border-radius:12px;margin-top:10px;max-height:220px;width:100%;object-fit:cover}
+
+/* 相册 */
+.catchips{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;scrollbar-width:none}
+.catchips::-webkit-scrollbar{display:none}
+.catchips .chip{flex:none}
+.masonry{columns:2;column-gap:12px}
+.masonry .ph{break-inside:avoid;margin-bottom:12px;border-radius:16px;overflow:hidden;position:relative;cursor:pointer;border:1px solid var(--line)}
+.masonry .ph img{width:100%;transition:transform .4s var(--ease)}
+.masonry .ph:active img{transform:scale(1.05)}
+.masonry .ph span{position:absolute;left:0;right:0;bottom:0;padding:20px 12px 10px;font-size:12px;background:linear-gradient(transparent,rgba(0,0,0,.75))}
+.viewer{position:fixed;inset:0;z-index:200;background:rgba(4,6,12,.96);display:grid;place-items:center;animation:fadeIn .3s;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+@keyframes fadeIn{from{opacity:0}}
+.viewer img{max-width:94vw;max-height:86vh;max-height:80dvh;border-radius:14px;box-shadow:var(--sh);animation:zoomIn .35s var(--ease)}
+@keyframes zoomIn{from{opacity:0;transform:scale(.92)}}
+.viewer .x{position:absolute;top:calc(16px + env(safe-area-inset-top));right:16px;width:42px;height:42px;border-radius:50%;background:var(--card2);border:1px solid var(--line2);font-size:18px;color:var(--txt)}
+.viewer .cap{position:absolute;bottom:calc(28px + env(safe-area-inset-bottom));left:0;right:0;text-align:center;color:var(--mut);font-size:14px;padding:0 24px}
+
+/* 动态 */
+.post{margin-bottom:14px}
+.post .hd{display:flex;align-items:center;gap:11px;margin-bottom:10px}
+.post .hd img{width:42px;height:42px;border-radius:50%;object-fit:cover;background:linear-gradient(135deg,var(--acc),var(--acc2));flex:none}
+.post .hd .nm{font-size:14px;font-weight:700}
+.post .hd .tm{font-size:12px;color:var(--dim)}
+.post .bd{font-size:14.5px;line-height:1.75;white-space:pre-wrap;margin-bottom:8px}
+.post .bd img{border-radius:14px;margin-top:10px;max-height:320px;width:100%;object-fit:cover}
+.post .ft{display:flex;gap:6px;margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
+.post .ft button{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:9px;font-size:13px;color:var(--dim);border-radius:10px;transition:all .2s}
+.post .ft button:active{transform:scale(.95)}
+.post .ft button.liked{color:var(--acc)}
+.cmt{background:rgba(255,255,255,.04);border-radius:12px;padding:10px 13px;margin-top:8px;font-size:13px}
+.cmt b{font-size:12.5px}
+.cmt .ct{color:var(--mut);margin-top:3px;line-height:1.6;white-space:pre-wrap}
+.composer{position:sticky;top:64px;z-index:20;margin-bottom:14px}
+
+/* 管理后台 */
+.admintabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:12px;scrollbar-width:none}
+.admintabs::-webkit-scrollbar{display:none}
+.admintabs .chip{flex:none;padding:10px 18px;white-space:nowrap}
+.urow{display:flex;align-items:center;gap:12px;padding:13px 4px;border-bottom:1px solid var(--line)}
+.urow:last-child{border:none}
+.urow img{width:46px;height:46px;border-radius:50%;object-fit:cover;background:linear-gradient(135deg,var(--acc),var(--acc2));flex:none}
+.urow .tx{flex:1;min-width:0}
+.urow .tx b{font-size:14.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.urow .tx span{font-size:12px;color:var(--dim)}
+.rolebadge{font-size:10.5px;padding:4px 10px;border-radius:999px;font-weight:700;flex:none;white-space:nowrap}
+.rolebadge.super{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff}
+.rolebadge.admin{background:color-mix(in srgb,var(--acc) 25%,transparent);color:var(--acc);border:1px solid var(--acc)}
+.rolebadge.member{background:rgba(255,255,255,.08);color:var(--dim)}
+.rolebadge.banned{background:rgba(248,113,113,.18);color:#fca5a5}
+.iconbtns{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.iconbtns button{font-size:12px;padding:8px 12px;border-radius:10px;background:var(--card2);border:1px solid var(--line);transition:transform .15s;color:var(--txt)}
+.iconbtns button:active{transform:scale(.94)}
+.iconbtns button.red{color:#fca5a5;border-color:rgba(248,113,113,.4)}
+
+/* 主题与布局选择 */
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tcard{border-radius:16px;overflow:hidden;border:2px solid transparent;cursor:pointer;transition:all .25s;position:relative;background:var(--card)}
+.tcard.on{border-color:var(--acc);box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 25%,transparent)}
+.tcard .sw{height:74px}
+.tcard span{display:block;text-align:center;font-size:12.5px;padding:9px}
+.lgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.lcard{border:2px solid transparent;border-radius:16px;background:var(--card);padding:14px;cursor:pointer;text-align:center;transition:all .25s;font-size:13px;color:var(--txt)}
+.lcard.on{border-color:var(--acc)}
+.lcard .demo{height:56px;border-radius:10px;background:color-mix(in srgb,var(--acc) 16%,transparent);margin-bottom:10px;position:relative;overflow:hidden}
+.lcard .demo i{position:absolute;background:linear-gradient(135deg,var(--acc),var(--acc2));border-radius:6px}
+
+/* 骨架与加载 */
+.sk{border-radius:16px;background:linear-gradient(100deg,rgba(255,255,255,.05) 40%,rgba(255,255,255,.11) 50%,rgba(255,255,255,.05) 60%);background-size:200% 100%;animation:sk 1.4s infinite}
+@keyframes sk{to{background-position:-200% 0}}
+.spin{width:44px;height:44px;margin:70px auto;border-radius:50%;border:3px solid var(--line);border-top-color:var(--acc);animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* toast */
+#toast{position:fixed;left:50%;transform:translateX(-50%) translateY(20px);bottom:calc(96px + env(safe-area-inset-bottom));z-index:300;background:rgba(20,26,48,.94);border:1px solid var(--line2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:13px 22px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:all .35s var(--ease);max-width:88vw;text-align:center;box-shadow:var(--sh);color:var(--txt)}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* 桌面端增强 */
+@media(min-width:560px){
+  .mgrid{grid-template-columns:1fr 1fr 1fr}
+  .masonry{columns:3}
+  .mcard:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.5)}
+  .mcard:hover .ph img{transform:scale(1.05)}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
-    <div class="brand"><div class="logo">✦</div><div>拾光 <span class="muted" style="font-weight:500">/ 班级纪念馆</span></div></div>
-    <div class="actions"><button class="btn" id="myBtn">我的主页</button><button class="btn primary" id="authBtn">登录 / 注册</button></div>
-  </header>
-  <section class="hero">
-    <div class="eyebrow">OUR LITTLE UNIVERSE · 班级记忆收藏夹</div>
-    <h1>把青春，收藏在这里。</h1>
-    <p>每个人都是故事的主角。上传照片、写下自己的小档案，定制属于你的页面，让那些共同走过的日子，在未来依然闪闪发光。</p>
-    <div class="actions"><button class="btn primary" id="joinBtn">加入我们的记忆 ↗</button><button class="btn" id="editBtn">编辑我的资料</button></div>
-  </section>
-  <div class="notice">隐私提醒：请只上传你有权分享的照片。个人资料默认仅自己可见；只有主动切换为公开后，同学才能看到你选择公开的信息。不要填写住址、手机号、密码等敏感信息。</div>
-  <section class="section">
-    <div class="sectionhead"><div><h2>同学档案</h2><div class="sub">认识每一个独一无二的你</div></div><div class="search"><input id="search" placeholder="搜索同学昵称…"></div></div>
-    <div id="people" class="grid"><div class="glass empty">正在加载同学档案…</div></div>
-  </section>
-  <section class="section" id="adminSection" hidden>
-    <div class="sectionhead"><div><h2>管理后台</h2><div class="sub">仅管理员可使用</div></div><button class="btn" id="refreshAdmin">刷新列表</button></div>
-    <div class="glass" style="padding:16px"><div id="adminList" class="muted">加载中…</div></div>
-  </section>
-  <div class="footer">拾光 · 班级纪念馆　|　愿每一段青春都有迹可循</div>
-</div>
-
-<div class="modal" id="modal"><div class="dialog"><div class="dialoghead"><div><h2 id="modalTitle">欢迎回来</h2><div class="small" id="modalSub">登录后，开始收藏班级记忆。</div></div><button class="x" id="closeModal" aria-label="关闭">×</button></div><div id="modalBody"></div></div></div>
-<div class="toast" id="toast"></div>
-
+<div class="bg" aria-hidden="true"><i></i><i></i><i></i></div>
+<div id="app"></div>
+<nav class="tabbar" id="tabbar" style="display:none"></nav>
+<div id="toast"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* 部署前：在 Supabase 项目设置中获取 Project URL 和 anon/public key，填入下方。
-   只能使用 anon/public key，绝不能把 service_role key 放进网页。 */
+"use strict";
+/* ================= 拾光 · 青春档案 v2 ================= */
 const SUPABASE_URL = "PASTE_SUPABASE_PROJECT_URL";
 const SUPABASE_ANON_KEY = "PASTE_SUPABASE_ANON_KEY";
-const configured = SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("PASTE_") && !SUPABASE_ANON_KEY.includes("PASTE_");
-const sb = configured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-let currentUser = null, ownProfile = null, publicPeople = [], currentSigned = {};
-const $ = id => document.getElementById(id);
-function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3200)}
-function openModal(title,sub,html){$("modalTitle").textContent=title;$("modalSub").textContent=sub||"";$("modalBody").innerHTML=html;$("modal").classList.add("open")}
-function closeModal(){$("modal").classList.remove("open")}
-$("closeModal").onclick=closeModal;$("modal").addEventListener("click",e=>{if(e.target===$("modal"))closeModal()});
-function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function fallbackPhoto(name="拾光"){const initials=(name||"拾光").slice(0,2);return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420"><defs><linearGradient id="g"><stop stop-color="#8b5cf6"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient></defs><rect width="600" height="420" rx="36" fill="url(#g)"/><circle cx="300" cy="160" r="70" fill="#ffffff" fill-opacity=".22"/><path d="M150 390 Q160 260 300 260 Q440 260 450 390" fill="#ffffff" fill-opacity=".22"/><text x="300" y="390" text-anchor="middle" font-size="34" fill="white" font-family="sans-serif">${initials}</text></svg>`)}
-async function photoUrl(path, isPublic=false){if(!path||!sb)return fallbackPhoto();if(currentSigned[path])return currentSigned[path];try{const {data,error}=await sb.storage.from("class-photos").createSignedUrl(path,3600);if(error)throw error;currentSigned[path]=data.signedUrl;return data.signedUrl}catch(e){return fallbackPhoto()}}
-async function init(){
- if(!configured){$("people").innerHTML='<div class="glass empty" style="grid-column:1/-1">网站代码已准备好。先按 README 配置 Supabase URL、公开 anon key 并执行数据库 SQL，网站就可以开始注册登录。</div>';return}
- const {data:{session}}=await sb.auth.getSession();currentUser=session?.user||null;
- sb.auth.onAuthStateChange((_event,session)=>{currentUser=session?.user||null;setTimeout(refresh,0)});
- await refresh();
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+/* ---------- 工具 ---------- */
+const $ = s => document.querySelector(s);
+const app = $("#app"), tabbar = $("#tabbar");
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtDate = d => { try { return new Date(d).toLocaleDateString("zh-CN",{year:"numeric",month:"long",day:"numeric"}); } catch(e){ return d||""; } };
+const timeAgo = t => { const s=(Date.now()-new Date(t))/1e3; if(s<60) return "刚刚"; if(s<3600) return Math.floor(s/60)+" 分钟前"; if(s<86400) return Math.floor(s/3600)+" 小时前"; if(s<86400*30) return Math.floor(s/86400)+" 天前"; return fmtDate(t); };
+const synEmail = u => "u_"+u.trim().toLowerCase().replace(/[^a-z0-9_]/g,"")+"@class-memory.local";
+let toastT=null;
+function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("show"),2400); }
+function stagger(){ document.querySelectorAll(".stagger").forEach(p=>{ [...p.children].forEach((c,i)=>c.style.setProperty("--d",(i*0.07)+"s")); }); }
+
+/* ---------- 全局状态 ---------- */
+const S = { user:null, profile:null, site:{class_name:"我们的班级",class_intro:"青春档案 · 拾光纪念馆"}, fromFlip:null };
+
+/* ---------- 路由 ---------- */
+const routes = {};
+function go(name, param){ (routes[name]||routes.auth)(param); window.scrollTo(0,0); }
+function topbar(title, back){ return `<div class="topbar">${back?`<button class="backbtn" data-back>‹</button>`:""}<h1>${esc(title)}</h1><span style="width:38px"></span></div>`; }
+document.addEventListener("click", e=>{ const b=e.target.closest("[data-back]"); if(b){ history.back(); } });
+function setTab(name){
+  const tabs=[["members","👥","成员"],["album","🖼️","相册"],["feed","💬","动态"],["me","🙂","我的"]];
+  const isAdmin = S.profile && (S.profile.role==="admin"||S.profile.role==="super_admin");
+  tabbar.style.display="flex";
+  tabbar.innerHTML = tabs.map(([k,ic,tx])=>`<button data-tab="${k}" class="${name===k?"on":""}"><span class="ic">${ic}</span>${tx}</button>`).join("")
+    + (isAdmin?`<button data-tab="admin" class="${name==="admin"?"on":""}"><span class="ic">⚙️</span>管理</button>`:"");
+  tabbar.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>go(b.dataset.tab));
 }
-async function refresh(){
- if(!sb)return;
- if(currentUser){const {data}=await sb.from("profiles").select("*").eq("id",currentUser.id).maybeSingle();ownProfile=data||null;$("authBtn").textContent="退出登录";$("myBtn").classList.remove("hidden");$("editBtn").textContent="编辑我的资料";if(ownProfile?.is_admin){$("adminSection").hidden=false;loadAdmin()}}else{ownProfile=null;$("authBtn").textContent="登录 / 注册";$("adminSection").hidden=true}
- const {data,error}=await sb.from("public_profiles").select("*").order("created_at",{ascending:false}).limit(100);
- publicPeople=data||[];if(error)console.error(error);renderPeople();
+function hideTab(){ tabbar.style.display="none"; }
+function applyTheme(t, color){
+  const root=document.documentElement;
+  root.dataset.theme=t||"aurora";
+  if(t==="custom"&&color){ root.style.setProperty("--custom",color); root.style.setProperty("--custom2",color+"99"); }
 }
-async function renderPeople(){
- const q=$("search").value.trim().toLowerCase();const filtered=publicPeople.filter(p=>(p.display_name||"").toLowerCase().includes(q));
- if(!filtered.length){$("people").innerHTML='<div class="glass empty" style="grid-column:1/-1">还没有公开的同学档案。登录后编辑自己的资料，并将主页设置为公开，就能出现在这里。</div>';return}
- const urls=await Promise.all(filtered.map(p=>photoUrl(p.avatar_path,true)));
- $("people").innerHTML=filtered.map((p,i)=>`<article class="glass person" data-id="${esc(p.id)}" style="animation-delay:${i*35}ms"><img class="avatar" src="${esc(urls[i])}" alt="个人照片" loading="lazy"><h3>${esc(p.display_name||"未命名同学")}</h3><p>${esc(p.personality||p.bio||"这个同学还没有写简介。")}</p><span class="tag">✦ 班级成员</span></article>`).join("");
- document.querySelectorAll(".person").forEach(el=>el.onclick=()=>showPublicProfile(el.dataset.id));
+
+/* ---------- 认证 ---------- */
+routes.auth = async function(){
+  hideTab();
+  try{ const {data}=await sb.from("site_settings").select("class_name,class_intro,invite_code").eq("id",1).single(); if(data) S.site=data; }catch(e){}
+  const needInvite = !!(S.site.invite_code);
+  app.innerHTML = `<div class="view"><div class="authwrap stagger">
+    <div class="brandmark"><div class="logo">📸</div><h2>${esc(S.site.class_name)}</h2><p>${esc(S.site.class_intro)}</p></div>
+    <div class="segtabs"><button id="tabLogin" class="on">登录</button><button id="tabReg">注册</button></div>
+    <div id="authErr"></div>
+    <div id="paneLogin">
+      <div class="field"><label>用户名</label><input id="liUser" placeholder="注册时的用户名" autocomplete="username"></div>
+      <div class="field"><label>密码</label><input id="liPw" type="password" placeholder="密码" autocomplete="current-password"></div>
+      <button class="btn" id="btnLogin">进入班级 →</button>
+    </div>
+    <div id="paneReg" style="display:none">
+      <div class="field"><label>用户名</label><input id="rgUser" placeholder="2-20位字母/数字/中文" autocomplete="username"></div>
+      <div class="field"><label>密码</label><input id="rgPw" type="password" placeholder="至少 6 位" autocomplete="new-password"></div>
+      <div class="field"><label>确认密码</label><input id="rgPw2" type="password" placeholder="再输一次" autocomplete="new-password"></div>
+      ${needInvite?`<div class="field"><label>班级邀请码</label><input id="rgInvite" placeholder="向管理员索取"></div>`:""}
+      <button class="btn" id="btnReg">注册并创建我的档案 →</button>
+      <p class="hint">用户名将作为你的登录账号，注册后自动成为班级成员。第一位注册的同学将成为超级管理员。</p>
+    </div>
+  </div></div>`;
+  stagger();
+  const showErr = m => { $("#authErr").innerHTML = m?`<div class="err">${esc(m)}</div>`:""; };
+  $("#tabLogin").onclick=()=>{ $("#tabLogin").classList.add("on"); $("#tabReg").classList.remove("on"); $("#paneLogin").style.display=""; $("#paneReg").style.display="none"; showErr(""); };
+  $("#tabReg").onclick=()=>{ $("#tabReg").classList.add("on"); $("#tabLogin").classList.remove("on"); $("#paneReg").style.display=""; $("#paneLogin").style.display="none"; showErr(""); };
+  $("#btnLogin").onclick = async ()=>{
+    const u=$("#liUser").value.trim(), p=$("#liPw").value;
+    if(!u||!p) return showErr("请输入用户名和密码");
+    showErr("");
+    const {error} = await sb.auth.signInWithPassword({email:synEmail(u), password:p});
+    if(error) return showErr("用户名或密码错误，请重试");
+    await afterAuth();
+  };
+  $("#btnReg").onclick = async ()=>{
+    const u=$("#rgUser").value.trim(), p=$("#rgPw").value, p2=$("#rgPw2").value;
+    if(!/^[a-zA-Z0-9_\u4e00-\u9fa5]{2,20}$/.test(u)) return showErr("用户名需为 2-20 位字母、数字、下划线或中文");
+    if(p.length<6) return showErr("密码至少 6 位");
+    if(p!==p2) return showErr("两次输入的密码不一致");
+    if(needInvite && $("#rgInvite").value.trim()!==S.site.invite_code) return showErr("邀请码不正确，请向管理员索取");
+    showErr("");
+    const {data:ex} = await sb.from("profiles").select("id").eq("username",u).limit(1);
+    if(ex && ex.length) return showErr("这个用户名已经被注册了");
+    const {data, error} = await sb.auth.signUp({email:synEmail(u), password:p});
+    if(error) return showErr(error.message.includes("already")?"这个用户名已经被注册了":"注册失败："+error.message);
+    const uid = data.user && data.user.id;
+    if(!uid) return showErr("注册失败，请重试");
+    const {error:e2} = await sb.from("profiles").insert({id:uid, username:u, display_name:u});
+    if(e2) return showErr("创建档案失败："+e2.message);
+    await sb.rpc("claim_super_admin");
+    toast("注册成功，欢迎加入！");
+    await afterAuth(true);
+  };
+};
+async function afterAuth(first){
+  const {data:{session}} = await sb.auth.getSession();
+  if(!session){ go("auth"); return; }
+  S.user = session.user;
+  const {data:prof} = await sb.from("profiles").select("*").eq("id",S.user.id).single();
+  if(!prof){ await sb.auth.signOut(); go("auth"); return; }
+  if(prof.is_banned){ await sb.auth.signOut(); S.user=null; S.profile=null; go("auth"); toast("该账号已被禁用"); return; }
+  S.profile = prof;
+  applyTheme("aurora");
+  go(first ? "edit" : "members");
 }
-$("search").addEventListener("input",renderPeople);
-$("authBtn").onclick=()=>currentUser?logout():showAuth();
-$("joinBtn").onclick=()=>currentUser?editProfile():showAuth("signup");
-$("editBtn").onclick=()=>currentUser?editProfile():showAuth();
-$("myBtn").onclick=()=>currentUser?editProfile():showAuth();
-async function logout(){await sb.auth.signOut();toast("已退出登录");await refresh()}
-function showAuth(mode="login"){
- openModal(mode==="signup"?"创建你的班级账号":"欢迎回来","使用邮箱注册或登录。",`
- <div class="field"><label>邮箱</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com"></div>
- <div class="field"><label>密码（至少 8 位）</label><input id="password" type="password" autocomplete="${mode==="signup"?"new-password":"current-password"}" minlength="8" placeholder="请设置安全的密码"></div>
- <div class="actions"><button class="btn primary" id="submitAuth">${mode==="signup"?"注册账号":"登录"}</button><button class="btn" id="switchAuth">${mode==="signup"?"已有账号？去登录":"没有账号？立即注册"}</button></div>
- <p class="small">注册后请查看邮箱确认邮件（如果项目启用了邮箱确认）。请勿使用与其他网站相同的密码。</p>`);
- $("submitAuth").onclick=async()=>{const email=$("email").value.trim(),password=$("password").value;if(!email||password.length<8){toast("请填写邮箱，密码至少 8 位");return}
- let res;if(mode==="signup"){res=await sb.auth.signUp({email,password});if(!res.error&&res.data.user){toast("注册请求已提交。若启用邮箱确认，请先查看邮箱。");closeModal()}}else{res=await sb.auth.signInWithPassword({email,password});if(!res.error){closeModal();toast("登录成功")}}
- if(res?.error)toast(res.error.message);
- };
- $("switchAuth").onclick=()=>showAuth(mode==="signup"?"login":"signup");
+async function logout(){ await sb.auth.signOut(); S.user=null; S.profile=null; go("auth"); }
+
+/* ---------- 成员列表 ---------- */
+let memberCache = [];
+routes.members = async function(){
+  setTab("members");
+  app.innerHTML = `<div class="view">${topbar(esc(S.site.class_name)+" · 成员")}
+    <div id="annBar"></div>
+    <div class="searchbar"><input id="q" placeholder="搜索名字 / 用户名 / 性格…"></div>
+    <div class="mgrid stagger" id="mgrid"></div></div>`;
+  try{
+    const {data:ann} = await sb.from("announcements").select("title,content").order("created_at",{ascending:false}).limit(1);
+    if(ann && ann.length) $("#annBar").innerHTML = `<div class="card pad" style="margin-bottom:14px;border-color:color-mix(in srgb,var(--warn) 45%,transparent)"><div style="font-size:13px;color:var(--warn);font-weight:700;margin-bottom:6px">📢 班级公告</div><div style="font-weight:700;font-size:15px">${esc(ann[0].title)}</div><div style="font-size:13.5px;color:var(--mut);margin-top:6px;line-height:1.7">${esc(ann[0].content)}</div></div>`;
+  }catch(e){}
+  const {data, error} = await sb.from("public_profiles").select("*").order("created_at",{ascending:true});
+  if(error){ $("#mgrid").innerHTML = `<div class="empty">加载失败，请检查 Supabase 配置<br>${esc(error.message)}</div>`; return; }
+  memberCache = data || [];
+  paintMembers("");
+  $("#q").oninput = e => paintMembers(e.target.value.trim().toLowerCase());
+};
+function paintMembers(kw){
+  const g = $("#mgrid"); if(!g) return;
+  const list = memberCache.filter(m=>{
+    if(!kw) return true;
+    return (m.display_name||"").toLowerCase().includes(kw)||(m.username||"").toLowerCase().includes(kw)||(m.personality||"").toLowerCase().includes(kw);
+  });
+  if(!list.length){ g.innerHTML = `<div class="empty" style="grid-column:1/-1">还没有成员<br>你是第一位？快去「我的」完善档案吧</div>`; return; }
+  g.innerHTML = list.map((m,i)=>{
+    const tags=[m.age?m.age+"岁":null,m.personality||null].filter(Boolean).slice(0,2).map(t=>`<span>${esc(t)}</span>`).join("");
+    const ph = m.avatar_url
+      ? `<img src="${esc(m.avatar_url)}" alt="" loading="lazy" data-ph="${m.id}">`
+      : `<div class="init" data-ph="${m.id}">${esc((m.display_name||m.username||"?")[0])}</div>`;
+    return `<div class="mcard" data-id="${m.id}" style="--d:${Math.min(i*0.05,0.4)}s">
+      <div class="ph">${ph}</div>
+      <div class="meta"><b>${esc(m.display_name||m.username||"未命名")}</b><div class="tags">${tags}</div>${m.signature?`<div class="sig">${esc(m.signature)}</div>`:""}</div>
+    </div>`;
+  }).join("");
+  stagger();
+  g.querySelectorAll(".mcard").forEach(c=>c.addEventListener("click",()=>openProfile(c.dataset.id, c)));
 }
-async function editProfile(){
- if(!currentUser){showAuth();return}
- if(!ownProfile){toast("正在初始化个人资料，请稍后再试");await refresh();return}
- const p=ownProfile;
- openModal("打造你的个人主页","带 * 为必填项。资料默认仅自己可见。",`
- <div class="field"><label>昵称 / 姓名 *</label><input id="pname" maxlength="60" value="${esc(p.display_name||"")}" placeholder="你希望同学怎么称呼你"></div>
- <div class="field"><label>年龄（可留空）</label><input id="page" type="number" min="1" max="120" value="${p.age??""}" placeholder="选填"></div>
- <div class="field"><label>性格标签</label><input id="ppers" maxlength="120" value="${esc(p.personality||"")}" placeholder="例如：慢热、爱笑、喜欢音乐"></div>
- <div class="field"><label>个人介绍</label><textarea id="pbio" maxlength="1000" placeholder="写下你想分享的小故事…">${esc(p.bio||"")}</textarea></div>
- <div class="field"><label>主页风格</label><select id="ptheme"><option value="violet" ${p.theme==="violet"?"selected":""}>梦幻紫蓝</option><option value="ocean" ${p.theme==="ocean"?"selected":""}>清透海洋</option><option value="sunset" ${p.theme==="sunset"?"selected":""}>温柔日落</option></select></div>
- <div class="field"><label>个人照片（JPG、PNG、WebP，建议小于 3MB）</label><input id="pfile" type="file" accept="image/jpeg,image/png,image/webp"></div>
- <label class="checkrow"><input type="checkbox" id="showage" ${p.show_age?"checked":""}>公开年龄</label>
- <label class="checkrow"><input type="checkbox" id="showpers" ${p.show_personality!==false?"checked":""}>公开性格标签</label>
- <label class="checkrow"><input type="checkbox" id="showbio" ${p.show_bio!==false?"checked":""}>公开个人介绍</label>
- <label class="checkrow"><input type="checkbox" id="showavatar" ${p.show_avatar!==false?"checked":""}>公开个人照片</label>
- <label class="checkrow"><input type="checkbox" id="public" ${p.profile_visibility==="public"?"checked":""}>将我的主页公开给已登录的班级成员</label>
- <div class="notice">为保护隐私，请不要填写家庭住址、电话号码、学校账号密码或其他敏感信息。公开主页会显示给登录的班级成员。</div>
- <div class="actions"><button class="btn primary" id="saveProfile">保存资料</button><button class="btn" id="cancelEdit">取消</button></div>`);
- $("cancelEdit").onclick=closeModal;
- $("saveProfile").onclick=async()=>{
-   const name=$("pname").value.trim();if(!name){toast("请填写昵称或姓名");return}
-   const updates={display_name:name,age:$("page").value?Number($("page").value):null,personality:$("ppers").value.trim(),bio:$("pbio").value.trim(),theme:$("ptheme").value,show_age:$("showage").checked,show_personality:$("showpers").checked,show_bio:$("showbio").checked,show_avatar:$("showavatar").checked,profile_visibility:$("public").checked?"public":"private"};
-   const file=$("pfile").files[0];
-   if(file){if(file.size>3*1024*1024){toast("照片请压缩到 3MB 以内");return}if(!["image/jpeg","image/png","image/webp"].includes(file.type)){toast("仅支持 JPG、PNG、WebP 图片");return}
-     const ext=file.type==="image/png"?"png":file.type==="image/webp"?"webp":"jpg";const path=currentUser.id+"/"+crypto.randomUUID()+"."+ext;
-     const {error:upErr}=await sb.storage.from("class-photos").upload(path,file,{contentType:file.type,upsert:false});if(upErr){toast("照片上传失败："+upErr.message);return}updates.avatar_path=path;
-   }
-   const {error}=await sb.from("profiles").update(updates).eq("id",currentUser.id);
-   if(error){toast("保存失败："+error.message);return}
-   closeModal();toast("个人资料已保存");await refresh();
- };
+
+/* ---------- FLIP 共享元素过渡 ---------- */
+function rectOf(el){ const r=el.getBoundingClientRect(); return {x:r.left,y:r.top,w:r.width,h:r.height}; }
+async function openProfile(id, cardEl){
+  const srcPh = cardEl ? cardEl.querySelector("[data-ph]") : null;
+  const srcRect = srcPh ? rectOf(srcPh) : null;
+  const isImg = srcPh && srcPh.tagName==="IMG";
+  S.fromFlip = srcRect ? {rect:srcRect, id, isImg, src:isImg?srcPh.src:null, init:(!isImg&&srcPh)?srcPh.textContent:""} : null;
+  hideTab();
+  await renderProfile(id, true);
+  const target = $("#pfPhoto");
+  if(!srcRect || !target){ stagger(); return; }
+  target.style.visibility="hidden";
+  const dim=document.createElement("div"); dim.className="flip-dim"; document.body.appendChild(dim);
+  let clone;
+  if(isImg){ clone=document.createElement("img"); clone.src=S.fromFlip.src; }
+  else { clone=document.createElement("div"); clone.style.cssText="background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;color:#fff;font-weight:800;font-size:40px"; clone.textContent=S.fromFlip.init||""; }
+  clone.className+=" flip-clone";
+  const t=rectOf(target);
+  Object.assign(clone.style,{left:srcRect.x+"px",top:srcRect.y+"px",width:srcRect.w+"px",height:srcRect.h+"px"});
+  document.body.appendChild(clone);
+  dim.animate([{opacity:0},{opacity:1}],{duration:280,easing:"ease-out",fill:"forwards"});
+  const dx=t.x+t.w/2-(srcRect.x+srcRect.w/2), dy=t.y+t.h/2-(srcRect.y+srcRect.h/2);
+  const tr=getComputedStyle(target).borderRadius;
+  try{
+    await clone.animate([
+      {transform:"translate(0,0) scale(1,1)",borderRadius:"18px",opacity:1},
+      {transform:`translate(${dx}px,${dy}px) scale(${t.w/srcRect.w},${t.h/srcRect.h})`,borderRadius:tr,opacity:1}
+    ],{duration:640,easing:"cubic-bezier(.22,1,.36,1)",fill:"forwards"}).finished;
+  }catch(e){}
+  target.style.visibility=""; clone.remove(); dim.remove();
+  stagger();
 }
-async function showPublicProfile(id){
- let p=publicPeople.find(x=>x.id===id);
- if(!p&&currentUser?.id===id)p=ownProfile;
- if(!p)return;
- const url=await photoUrl(p.avatar_path,true);
- openModal(p.display_name||"同学主页","拾光 · 班级记忆",`
- <div class="profile-layout"><img class="profile-photo" src="${esc(url)}" alt="个人照片">
- <div class="profile-info">${p.age!=null?`<div><div class="small">年龄</div><strong>${esc(p.age)}</strong></div>`:""}${p.personality?`<div><div class="small">性格标签</div><p>${esc(p.personality)}</p></div>`:""}${p.bio?`<div><div class="small">关于我</div><p>${esc(p.bio)}</p></div>`:""}<div class="small">主页风格：${esc(({violet:"梦幻紫蓝",ocean:"清透海洋",sunset:"温柔日落"})[p.theme]||"梦幻紫蓝")}</div></div></div>
- ${currentUser?.id===p.id?'<div class="divider"></div><button class="btn primary" id="profileEdit">编辑我的主页</button>':""}`);
- if(currentUser?.id===p.id)$("profileEdit").onclick=editProfile;
+async function closeProfile(){
+  const f=S.fromFlip, target=$("#pfPhoto");
+  if(!f||!target){ go("members"); return; }
+  const r=rectOf(target);
+  const dim=document.createElement("div"); dim.className="flip-dim"; dim.style.opacity="1"; document.body.appendChild(dim);
+  let clone;
+  if(f.isImg){ clone=document.createElement("img"); clone.src=f.src||target.src; }
+  else { clone=document.createElement("div"); clone.style.cssText="background:linear-gradient(135deg,var(--acc),var(--acc2))"; }
+  clone.className+=" flip-clone";
+  const tr=getComputedStyle(target).borderRadius;
+  Object.assign(clone.style,{left:r.x+"px",top:r.top+"px",width:r.w+"px",height:r.h+"px",borderRadius:tr});
+  document.body.appendChild(clone);
+  target.style.visibility="hidden";
+  const dx=f.rect.x+f.rect.w/2-(r.x+r.w/2), dy=f.rect.y+f.rect.h/2-(r.y+r.h/2);
+  try{
+    await Promise.all([
+      clone.animate([
+        {transform:"translate(0,0) scale(1,1)",borderRadius:tr,opacity:1},
+        {transform:`translate(${dx}px,${dy}px) scale(${f.rect.w/r.w},${f.rect.h/r.h})`,borderRadius:"18px",opacity:.9}
+      ],{duration:520,easing:"cubic-bezier(.22,1,.36,1)",fill:"forwards"}).finished,
+      dim.animate([{opacity:1},{opacity:0}],{duration:420,fill:"forwards"}).finished
+    ]);
+  }catch(e){}
+  clone.remove(); dim.remove(); go("members");
 }
-async function loadAdmin(){
- if(!ownProfile?.is_admin)return;
- $("adminSection").hidden=false;$("adminList").textContent="正在加载用户…";
- const {data,error}=await sb.from("profiles").select("id,display_name,profile_visibility,is_banned,is_admin,created_at").order("created_at",{ascending:false}).limit(100);
- if(error){$("adminList").textContent="读取失败："+error.message;return}
- $("adminList").innerHTML=(data||[]).map(p=>`<div class="admin-row"><div><strong>${esc(p.display_name||"未命名")}</strong><div class="small">${esc(p.id.slice(0,8))} · ${p.profile_visibility==="public"?"公开主页":"私密主页"}${p.is_admin?" · 管理员":""}</div></div><div class="actions"><button class="btn ${p.is_banned?"":"danger"}" data-ban="${esc(p.id)}" data-value="${p.is_banned?"false":"true"}">${p.is_banned?"解除限制":"限制账号"}</button></div></div>`).join("")||"还没有用户。";
- document.querySelectorAll("[data-ban]").forEach(b=>b.onclick=async()=>{if(b.dataset.ban===currentUser.id){toast("不能在此处限制自己的账号");return}const {error}=await sb.rpc("admin_set_banned",{target_user_id:b.dataset.ban,ban_value:b.dataset.value==="true"});if(error)toast("操作失败："+error.message);else{toast("用户状态已更新");loadAdmin()}});
+
+/* ---------- 个人档案 ---------- */
+async function renderProfile(id, forFlip){
+  const mine = S.profile && S.profile.id===id;
+  let p;
+  if(mine){ p=S.profile; }
+  else { const {data,error}=await sb.from("public_profiles").select("*").eq("id",id).single(); if(error||!data){ toast("成员不存在或已设为私密"); go("members"); return; } p=data; }
+  const theme=p.theme||"aurora";
+  const nm=p.display_name||p.username||"未命名";
+  const kv=[p.age?p.age+" 岁":null,p.personality||null].filter(Boolean).map(t=>`<span>${esc(t)}</span>`).join("");
+  const phCls = p.photo_layout==="cover" ? "bgph" : "ph";
+  const photoHtml = p.avatar_url
+    ? `<img id="pfPhoto" class="${phCls}" src="${esc(p.avatar_url)}" alt="">`
+    : `<div id="pfPhoto" class="ph" style="display:grid;place-items:center;font-size:52px;font-weight:800;color:rgba(255,255,255,.4)">${esc(nm[0]||"?")}</div>`;
+  let headHtml="";
+  if(p.photo_layout==="cover"){
+    headHtml=`<div class="pf-cover">${photoHtml}<div class="shade"></div><div class="who"><h2>${esc(nm)}</h2><div class="sub">@${esc(p.username||"")}</div><div class="kv">${kv}</div></div></div>`;
+  } else if(p.photo_layout==="center"){
+    headHtml=`<div class="pf-center">${photoHtml}<h2>${esc(nm)}</h2><div class="sub" style="color:var(--mut);font-size:13px;margin-top:4px">@${esc(p.username||"")}</div><div class="kv" style="justify-content:center">${kv}</div></div>`;
+  } else {
+    const rev = p.photo_layout==="right" ? `style="flex-direction:row-reverse"` : "";
+    headHtml=`<div class="pf-row" ${rev}>${photoHtml}<div class="who"><h2>${esc(nm)}</h2><div class="sub" style="color:var(--mut);font-size:13px;margin:4px 0">@${esc(p.username||"")}</div><div class="kv">${kv}</div></div></div>`;
+  }
+  const {data:tl}=await sb.from("timeline_events").select("*").eq("user_id",id).order("event_date",{ascending:false}).limit(3);
+  const {data:alb}=await sb.from("albums").select("id,title,cover_url").eq("user_id",id).order("created_at",{ascending:false}).limit(4);
+  app.innerHTML=`<div class="view" data-theme="${esc(theme)}" ${theme==="custom"?`style="--custom:${esc(p.theme_color||"#a78bfa")};--custom2:${esc(p.theme_color||"#a78bfa")}99"}`:""}>
+    ${topbar(nm+" 的档案", true)}
+    <div class="stagger">
+      <div>${headHtml}</div>
+      <div>${p.signature?`<div class="sigline">${esc(p.signature)}</div>`:""}
+      ${p.bio?`<div class="bio">${esc(p.bio)}</div>`:""}
+      ${p.hobbies?`<div class="secttl">兴趣爱好</div><div class="bio">${esc(p.hobbies)}</div>`:""}</div>
+      <div><div class="secttl">青春时间线</div>
+        ${(tl&&tl.length)?`<div class="tl">${tl.map(e=>`<div class="tl-item"><div class="card"><h4>${esc(e.title)}</h4><div class="dt">${fmtDate(e.event_date)}</div>${e.text?`<p>${esc(e.text)}</p>`:""}${e.image_url?`<img src="${esc(e.image_url)}" loading="lazy">`:""}</div></div>`).join("")}</div>
+        <button class="btn ghost sm" data-goto-tl>查看完整时间线 →</button>`
+        :`<div class="empty" style="padding:24px">还没有记录第一笔青春</div>`}</div>
+      <div><div class="secttl">个人相册</div>
+        ${(alb&&alb.length)?`<div class="mgrid">${alb.map(a=>`<div class="mcard" data-album="${a.id}"><div class="ph" style="aspect-ratio:1">${a.cover_url?`<img src="${esc(a.cover_url)}" loading="lazy">`:`<div class="init">🖼️</div>`}</div><div class="meta"><b>${esc(a.title)}</b></div></div>`).join("")}</div>`
+        :`<div class="empty" style="padding:24px">还没有创建相册</div>`}</div>
+      ${mine?`<div><button class="btn ghost" id="pfEdit" style="margin-top:8px">编辑我的档案</button></div>`:""}
+    </div></div>`;
+  document.querySelector("[data-back]").onclick=()=>closeProfile();
+  const gtl=document.querySelector("[data-goto-tl]"); if(gtl) gtl.onclick=()=>go("timeline",{uid:id,back:"profile"});
+  app.querySelectorAll("[data-album]").forEach(c=>c.onclick=()=>go("albumview",{album:c.dataset.album,back:"profile",uid:id}));
+  const pe=$("#pfEdit"); if(pe) pe.onclick=()=>go("edit");
+  if(!forFlip) stagger();
 }
-$("refreshAdmin").onclick=loadAdmin;
-init();
+routes.profile = async function(param){ hideTab(); await renderProfile(param, false); };
+
+/* ---------- 我的 ---------- */
+routes.me = function(){
+  setTab("me");
+  const p=S.profile, nm=p.display_name||p.username;
+  const roleTx={super_admin:"超级管理员",admin:"管理员",member:"成员"}[p.role]||"成员";
+  app.innerHTML=`<div class="view">${topbar("我的")}
+  <div class="stagger">
+    <div class="card pad" style="display:flex;gap:14px;align-items:center">
+      ${p.avatar_url?`<img src="${esc(p.avatar_url)}" style="width:64px;height:64px;border-radius:50%;object-fit:cover">`:`<div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;font-size:26px;font-weight:800;flex:none">${esc(nm[0]||"?")}</div>`}
+      <div style="flex:1;min-width:0"><b style="font-size:17px">${esc(nm)}</b><div style="font-size:12.5px;color:var(--dim);margin-top:3px">@${esc(p.username)} · ${roleTx}</div></div>
+      <span class="rolebadge ${p.role==="super_admin"?"super":p.role}">${roleTx}</span>
+    </div>
+    <div class="card" style="margin-top:14px;padding:6px 16px">
+      ${[["edit","✏️","编辑个人档案","名字、照片、签名、简介…"],
+        ["design","🎨","我的主页设计","照片位置、主题风格"],
+        ["privacy","🔒","隐私设置","逐项控制公开内容"],
+        ["timeline","📜","我的青春时间线","记录每一个重要时刻"],
+        ["myalbum","🖼️","我的相册","创建相册、上传照片"]].map(([k,ic,t,d])=>`
+        <div class="setrow" data-go="${k}" style="cursor:pointer"><div class="tx"><b>${ic} ${t}</b><span>${d}</span></div><span style="color:var(--dim)">›</span></div>`).join("")}
+    </div>
+    <div style="margin-top:18px"><button class="btn ghost" id="btnLogout">退出登录</button></div>
+  </div></div>`;
+  stagger();
+  app.querySelectorAll("[data-go]").forEach(r=>r.onclick=()=>go(r.dataset.go));
+  $("#btnLogout").onclick=logout;
+};
+
+/* ---------- 编辑档案 ---------- */
+routes.edit = function(){
+  setTab("me");
+  const p=S.profile;
+  app.innerHTML=`<div class="view">${topbar("编辑个人档案",true)}
+  <div class="stagger"><div class="card pad">
+    <div class="field"><label>名字</label><input id="f_name" value="${esc(p.display_name||"")}" maxlength="60"></div>
+    <div class="field"><label>年龄</label><input id="f_age" type="number" min="1" max="120" value="${p.age||""}" placeholder="不填则不显示"></div>
+    <div class="field"><label>性格</label><input id="f_per" value="${esc(p.personality||"")}" maxlength="120" placeholder="如：开朗、慢热"></div>
+    <div class="field"><label>个性签名</label><input id="f_sig" value="${esc(p.signature||"")}" maxlength="200" placeholder="一句话介绍自己"></div>
+    <div class="field"><label>个人简介</label><textarea id="f_bio" maxlength="2000" placeholder="写下你的故事…">${esc(p.bio||"")}</textarea></div>
+    <div class="field"><label>个人照片（图片链接）</label><input id="f_av" value="${esc(p.avatar_url||"")}" placeholder="https://…"><p class="hint">先支持图片链接：把照片传到图床后粘贴地址即可。</p></div>
+    <div class="field"><label>兴趣爱好</label><input id="f_hob" value="${esc(p.hobbies||"")}" maxlength="500" placeholder="如：摄影、篮球、吉他"></div>
+    <div class="field"><label>联系方式（默认不公开）</label><input id="f_con" value="${esc(p.contact||"")}" placeholder="手机号 / 微信号"></div>
+    <div class="field"><label>社交账号（默认不公开）</label><input id="f_soc" value="${esc(p.social||"")}" placeholder="如：微博 / B站 ID"></div>
+    <div class="field"><label>主页是否公开</label><select id="f_vis"><option value="public" ${p.profile_visibility!=="private"?"selected":""}>公开（成员可见）</option><option value="private" ${p.profile_visibility==="private"?"selected":""}>私密（仅自己可见）</option></select></div>
+    <button class="btn" id="f_save">保存档案</button>
+  </div></div></div>`;
+  stagger();
+  document.querySelector("[data-back]").onclick=()=>go("me");
+  $("#f_save").onclick=async()=>{
+    const age=parseInt($("#f_age").value)||null;
+    const upd={display_name:$("#f_name").value.trim()||p.username, age, personality:$("#f_per").value.trim(),
+      signature:$("#f_sig").value.trim(), bio:$("#f_bio").value.trim(), avatar_url:$("#f_av").value.trim()||null,
+      hobbies:$("#f_hob").value.trim(), contact:$("#f_con").value.trim(), social:$("#f_soc").value.trim(),
+      profile_visibility:$("#f_vis").value};
+    const {error}=await sb.from("profiles").update(upd).eq("id",p.id);
+    if(error) return toast("保存失败："+error.message);
+    Object.assign(S.profile,upd); toast("已保存"); go("me");
+  };
+};
+
+/* ---------- 主页设计 ---------- */
+const THEMES=[["aurora","极光","linear-gradient(135deg,#a78bfa,#60a5fa)"],["sunset","晚霞","linear-gradient(135deg,#fb923c,#f472b6)"],["forest","森林","linear-gradient(135deg,#34d399,#a3e635)"],["mono","黑白","linear-gradient(135deg,#e5e7eb,#6b7280)"],["starry","星空","linear-gradient(135deg,#818cf8,#38bdf8)"],["ocean","海洋","linear-gradient(135deg,#38bdf8,#2dd4bf)"],["custom","自定义","linear-gradient(135deg,#f472b6,#a78bfa)"]];
+const LAYOUTS=[["left","左侧","<i style='left:8px;top:8px;bottom:8px;width:26px'></i>"],["right","右侧","<i style='right:8px;top:8px;bottom:8px;width:26px'></i>"],["center","居中","<i style='left:50%;top:6px;width:30px;height:30px;transform:translateX(-50%)'></i>"],["cover","全屏背景","<i style='inset:0;border-radius:10px;opacity:.85'></i>"]];
+routes.design = function(){
+  setTab("me");
+  const p=S.profile;
+  app.innerHTML=`<div class="view">${topbar("我的主页设计",true)}
+  <div class="stagger">
+    <div><div class="secttl" style="margin-top:0">照片位置</div><div class="lgrid">
+      ${LAYOUTS.map(([k,n,demo])=>`<div class="lcard ${p.photo_layout===k?"on":""}" data-lay="${k}"><div class="demo">${demo}</div>${n}</div>`).join("")}
+    </div></div>
+    <div><div class="secttl">主题风格</div><div class="tgrid">
+      ${THEMES.map(([k,n,sw])=>`<div class="tcard ${p.theme===k?"on":""}" data-th="${k}"><div class="sw" style="background:${sw}"></div><span>${n}</span></div>`).join("")}
+    </div>
+    <div class="field" id="customColor" style="margin-top:14px;${p.theme==="custom"?"":"display:none"}"><label>自定义颜色</label><input type="color" id="f_color" value="${esc(p.theme_color||"#a78bfa")}" style="height:52px;padding:6px"></div></div>
+    <div><button class="btn" id="d_save" style="margin-top:20px">保存设计</button>
+    <button class="btn ghost" id="d_preview" style="margin-top:10px">预览我的主页</button></div>
+  </div></div>`;
+  stagger();
+  document.querySelector("[data-back]").onclick=()=>go("me");
+  let lay=p.photo_layout, th=p.theme;
+  const paint=()=>{ app.querySelectorAll("[data-lay]").forEach(c=>c.classList.toggle("on",c.dataset.lay===lay)); app.querySelectorAll("[data-th]").forEach(c=>c.classList.toggle("on",c.dataset.th===th)); $("#customColor").style.display=th==="custom"?"":"none"; applyTheme(th,$("#f_color").value); };
+  app.querySelectorAll("[data-lay]").forEach(c=>c.onclick=()=>{lay=c.dataset.lay;paint();});
+  app.querySelectorAll("[data-th]").forEach(c=>c.onclick=()=>{th=c.dataset.th;paint();});
+  $("#f_color").oninput=e=>{ if(th==="custom") applyTheme("custom",e.target.value); };
+  paint();
+  $("#d_save").onclick=async()=>{
+    const upd={photo_layout:lay, theme:th, theme_color:$("#f_color").value};
+    const {error}=await sb.from("profiles").update(upd).eq("id",p.id);
+    if(error) return toast("保存失败："+error.message);
+    Object.assign(S.profile,upd); applyTheme("aurora"); toast("设计已保存"); go("me");
+  };
+  $("#d_preview").onclick=async()=>{ Object.assign(S.profile,{photo_layout:lay, theme:th, theme_color:$("#f_color").value}); hideTab(); await renderProfile(p.id,false); document.querySelector("[data-back]").onclick=()=>go("design"); };
+};
+
+/* ---------- 隐私设置 ---------- */
+const PRIV_FIELDS=[["show_name","名字"],["show_age","年龄"],["show_personality","性格"],["show_signature","个性签名"],["show_bio","个人简介"],["show_avatar","个人照片"],["show_hobbies","兴趣爱好"]];
+routes.privacy = function(){
+  setTab("me");
+  const p=S.profile;
+  app.innerHTML=`<div class="view">${topbar("隐私设置",true)}
+  <div class="stagger">
+    <div class="card pad"><div style="font-size:14px;font-weight:700;margin-bottom:6px">我的公开资料</div>
+      <p class="hint" style="margin:0 0 8px">关闭后，其他成员将看不到该项。手机号与社交账号永不公开，只对你自己可见。</p>
+      ${PRIV_FIELDS.map(([k,n])=>`<div class="setrow"><div class="tx"><b>${n}</b></div><label class="switch"><input type="checkbox" data-pk="${k}" ${p[k]?"checked":""}><span class="tr"></span><span class="th"></span></label></div>`).join("")}
+    </div>
+    <button class="btn" id="pv_save" style="margin-top:16px">保存隐私设置</button>
+  </div></div>`;
+  stagger();
+  document.querySelector("[data-back]").onclick=()=>go("me");
+  $("#pv_save").onclick=async()=>{
+    const upd={}; app.querySelectorAll("[data-pk]").forEach(c=>upd[c.dataset.pk]=c.checked);
+    const {error}=await sb.from("profiles").update(upd).eq("id",p.id);
+    if(error) return toast("保存失败："+error.message);
+    Object.assign(S.profile,upd); toast("隐私设置已保存"); go("me");
+  };
+};
+
+/* ---------- 青春时间线 ---------- */
+routes.timeline = async function(param){
+  setTab("me");
+  const uid=(param&&param.uid)||S.profile.id;
+  const mine=uid===S.profile.id;
+  const backToProfile=(param&&param.back)==="profile";
+  app.innerHTML=`<div class="view">${topbar(mine?"我的青春时间线":"青春时间线",true)}<div id="tlBody"><div class="spin"></div></div>
+  ${mine?`<button class="btn" id="tlAdd" style="margin-top:16px">＋ 记录新时刻</button>`:""}</div>`;
+  document.querySelector("[data-back]").onclick=()=>{ backToProfile?go("profile",uid):go("me"); };
+  const {data,error}=await sb.from("timeline_events").select("*").eq("user_id",uid).order("event_date",{ascending:true});
+  if(error){ $("#tlBody").innerHTML=`<div class="empty">加载失败</div>`; return; }
+  if(!data.length){ $("#tlBody").innerHTML=`<div class="empty">还没有记录<br>把第一次见面、军训、春游都存下来吧</div>`; }
+  else{
+    let lastY="", html=`<div class="tl stagger">`;
+    data.forEach((e,i)=>{ const y=new Date(e.event_date).getFullYear();
+      if(y!==lastY){ html+=`<div class="tl-year" style="--d:${i*0.05}s">${y}</div>`; lastY=y; }
+      html+=`<div class="tl-item" style="--d:${i*0.05}s"><div class="card"><h4>${esc(e.title)}</h4><div class="dt">${fmtDate(e.event_date)}</div>${e.text?`<p>${esc(e.text)}</p>`:""}${e.image_url?`<img src="${esc(e.image_url)}" loading="lazy">`:""}${e.video_url?`<video src="${esc(e.video_url)}" controls style="width:100%;border-radius:12px;margin-top:10px"></video>`:""}${mine?`<div class="iconbtns" style="margin-top:10px"><button data-tedit="${e.id}">编辑</button><button class="red" data-tdel="${e.id}">删除</button></div>`:""}</div></div>`; });
+    $("#tlBody").innerHTML=html+"</div>"; stagger();
+    $("#tlBody").querySelectorAll("[data-tdel]").forEach(b=>b.onclick=async()=>{ if(!confirm("确定删除这条记录吗？"))return; await sb.from("timeline_events").delete().eq("id",b.dataset.tdel); toast("已删除"); go("timeline",param); });
+    $("#tlBody").querySelectorAll("[data-tedit]").forEach(b=>b.onclick=()=>tlForm(b.dataset.tedit));
+  }
+  const add=$("#tlAdd"); if(add) add.onclick=()=>tlForm(null);
+};
+function tlForm(id){
+  const isEdit=!!id;
+  app.innerHTML=`<div class="view">${topbar(isEdit?"编辑时刻":"记录新时刻",true)}
+  <div class="stagger"><div class="card pad">
+    <div class="field"><label>日期</label><input id="t_date" type="date" value="${new Date().toISOString().slice(0,10)}"></div>
+    <div class="field"><label>标题</label><input id="t_title" maxlength="120" placeholder="如：第一次班级春游"></div>
+    <div class="field"><label>文字</label><textarea id="t_text" maxlength="2000" placeholder="写下当时的心情…"></textarea></div>
+    <div class="field"><label>图片链接（可选）</label><input id="t_img" placeholder="https://…"></div>
+    <div class="field"><label>视频链接（可选）</label><input id="t_vid" placeholder="https://…"></div>
+    <button class="btn" id="t_save">保存</button>
+  </div></div></div>`;
+  stagger();
+  document.querySelector("[data-back]").onclick=()=>go("timeline");
+  (async()=>{ if(isEdit){ const {data}=await sb.from("timeline_events").select("*").eq("id",id).single(); if(data){ $("#t_date").value=data.event_date; $("#t_title").value=data.title; $("#t_text").value=data.text||""; $("#t_img").value=data.image_url||""; $("#t_vid").value=data.video_url||""; } } })();
+  $("#t_save").onclick=async()=>{
+    const row={user_id:S.profile.id, event_date:$("#t_date").value||new Date().toISOString().slice(0,10), title:$("#t_title").value.trim(), text:$("#t_text").value.trim(), image_url:$("#t_img").value.trim()||null, video_url:$("#t_vid").value.trim()||null};
+    if(!row.title) return toast("请填写标题");
+    const {error}= isEdit ? await sb.from("timeline_events").update(row).eq("id",id) : await sb.from("timeline_events").insert(row);
+    if(error) return toast("保存失败："+error.message);
+    toast("已保存"); go("timeline");
+  };
+}
+
+/* ---------- 相册 ---------- */
+const CATS=["全部","班级日常","军训","运动会","春游","聚会","毕业"];
+routes.album = async function(){
+  setTab("album");
+  app.innerHTML=`<div class="view">${topbar("班级相册")}
+  <div class="catchips" id="cats">${CATS.map((c,i)=>`<button class="chip ${i===0?"on":""}" data-cat="${c}">${c}</button>`).join("")}</div>
+  <div class="mgrid stagger" id="agrid" style="grid-template-columns:1fr 1fr"></div></div>`;
+  const {data}=await sb.from("albums").select("*").is("user_id",null).order("created_at",{ascending:false});
+  const paint=cat=>{
+    const list=(data||[]).filter(a=>cat==="全部"||a.category===cat);
+    $("#agrid").innerHTML=list.length?list.map((a,i)=>`<div class="mcard" data-a="${a.id}" style="--d:${Math.min(i*0.05,0.3)}s"><div class="ph" style="aspect-ratio:1">${a.cover_url?`<img src="${esc(a.cover_url)}" loading="lazy">`:`<div class="init">🖼️</div>`}</div><div class="meta"><b>${esc(a.title)}</b><div class="tags"><span>${esc(a.category)}</span></div></div></div>`).join(""):`<div class="empty" style="grid-column:1/-1">这个分类还没有照片</div>`;
+    stagger();
+    $("#agrid").querySelectorAll("[data-a]").forEach(c=>c.onclick=()=>go("albumview",{album:c.dataset.a,back:"album"}));
+  };
+  paint("全部");
+  $("#cats").querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{ $("#cats").querySelectorAll("[data-cat]").forEach(x=>x.classList.remove("on")); b.classList.add("on"); paint(b.dataset.cat); });
+};
+routes.myalbum = async function(){
+  setTab("me");
+  app.innerHTML=`<div class="view">${topbar("我的相册",true)}<div id="maBody"><div class="spin"></div></div>
+  <div class="card pad" style="margin-top:16px"><div class="secttl" style="margin-top:0">新建相册</div>
+  <div class="field"><label>相册名</label><input id="na_title" maxlength="80" placeholder="如：毕业季"></div>
+  <div class="field"><label>分类</label><select id="na_cat">${["班级日常","军训","运动会","春游","聚会","毕业","自定义"].map(c=>`<option>${c}</option>`).join("")}</select></div>
+  <button class="btn" id="na_go">创建相册</button></div></div>`;
+  document.querySelector("[data-back]").onclick=()=>go("me");
+  const load=async()=>{
+    const {data}=await sb.from("albums").select("*").eq("user_id",S.profile.id).order("created_at",{ascending:false});
+    $("#maBody").innerHTML=(data&&data.length)?`<div class="mgrid stagger" style="grid-template-columns:1fr 1fr">${data.map((a,i)=>`<div class="mcard" data-a="${a.id}" style="--d:${i*0.05}s"><div class="ph" style="aspect-ratio:1">${a.cover_url?`<img src="${esc(a.cover_url)}" loading="lazy">`:`<div class="init">🖼️</div>`}</div><div class="meta"><b>${esc(a.title)}</b><div class="tags"><span>${esc(a.category)}</span></div></div></div>`).join("")}</div>`:`<div class="empty">还没有相册，创建一个吧</div>`;
+    stagger();
+    $("#maBody").querySelectorAll("[data-a]").forEach(c=>c.onclick=()=>go("albumview",{album:c.dataset.a,back:"myalbum"}));
+  };
+  await load();
+  $("#na_go").onclick=async()=>{
+    const t=$("#na_title").value.trim(); if(!t) return toast("请填写相册名");
+    const {error}=await sb.from("albums").insert({user_id:S.profile.id,title:t,category:$("#na_cat").value});
+    if(error) return toast("创建失败："+error.message);
+    toast("相册已创建"); load();
+  };
+};
+routes.albumview = async function(param){
+  hideTab();
+  const {data:al}=await sb.from("albums").select("*").eq("id",param.album).single();
+  if(!al){ toast("相册不存在"); go(param.back||"album"); return; }
+  const canEdit = al.user_id===S.profile.id || ["admin","super_admin"].includes(S.profile.role);
+  app.innerHTML=`<div class="view">${topbar(al.title,true)}<div class="masonry stagger" id="phgrid"></div>
+  ${canEdit?`<div class="card pad" style="margin-top:16px"><div class="secttl" style="margin-top:0">添加照片</div>
+    <div class="field"><label>图片链接</label><input id="pa_url" placeholder="https://…"></div>
+    <div class="field"><label>备注（可选）</label><input id="pa_cap" maxlength="200"></div>
+    <button class="btn" id="pa_go">添加</button>
+    <button class="btn ghost sm" id="pa_del" style="margin-top:10px">删除这个相册</button></div>`:""}</div>`;
+  document.querySelector("[data-back]").onclick=()=>{ const b=param.back; if(b==="profile") go("profile",param.uid); else go(b||"album"); };
+  const load=async()=>{
+    const {data}=await sb.from("album_photos").select("*").eq("album_id",al.id).order("created_at",{ascending:true});
+    $("#phgrid").innerHTML=(data&&data.length)?data.map((p,i)=>`<div class="ph" data-p="${i}" style="--d:${Math.min(i*0.04,0.3)}s"><img src="${esc(p.image_url)}" loading="lazy">${p.caption?`<span>${esc(p.caption)}</span>`:""}</div>`).join(""):`<div class="empty">还没有照片</div>`;
+    stagger();
+    const arr=data||[];
+    $("#phgrid").querySelectorAll("[data-p]").forEach(el=>el.onclick=()=>showViewer(arr.map(x=>({u:x.image_url,c:x.caption})),+el.dataset.p));
+  };
+  await load();
+  if(canEdit){
+    $("#pa_go").onclick=async()=>{
+      const u=$("#pa_url").value.trim(); if(!u) return toast("请填写图片链接");
+      const {error}=await sb.from("album_photos").insert({album_id:al.id,image_url:u,caption:$("#pa_cap").value.trim()});
+      if(error) return toast("添加失败："+error.message);
+      const up2={}; if(!al.cover_url) up2.cover_url=u;
+      if(Object.keys(up2).length) await sb.from("albums").update(up2).eq("id",al.id);
+      $("#pa_url").value=""; $("#pa_cap").value=""; toast("已添加"); load();
+    };
+    $("#pa_del").onclick=async()=>{ if(!confirm("确定删除整个相册吗？"))return; await sb.from("albums").delete().eq("id",al.id); toast("已删除"); const b=param.back; if(b==="profile") go("profile",param.uid); else go(b||"album"); };
+  }
+};
+function showViewer(items, idx){
+  let i=idx;
+  const v=document.createElement("div"); v.className="viewer";
+  const paint=()=>{ v.innerHTML=`<button class="x">✕</button><img src="${esc(items[i].u)}"><div class="cap">${i+1} / ${items.length}${items[i].c?" · "+esc(items[i].c):""}</div>`; v.querySelector(".x").onclick=()=>v.remove(); };
+  paint();
+  let sx=null;
+  v.addEventListener("touchstart",e=>sx=e.touches[0].clientX,{passive:true});
+  v.addEventListener("touchend",e=>{ if(sx===null)return; const dx=e.changedTouches[0].clientX-sx; if(dx<-50) i=(i+1)%items.length; if(dx>50) i=(i-1+items.length)%items.length; sx=null; paint(); },{passive:true});
+  v.addEventListener("click",e=>{ if(e.target===v) v.remove(); });
+  document.body.appendChild(v);
+}
+
+/* ---------- 班级动态 ---------- */
+routes.feed = async function(){
+  setTab("feed");
+  const isAdmin=["admin","super_admin"].includes(S.profile.role);
+  app.innerHTML=`<div class="view">${topbar("班级动态")}
+  <div class="card pad composer"><div class="field" style="margin-bottom:10px"><textarea id="po_text" maxlength="2000" placeholder="分享今天的班级故事…" style="min-height:76px"></textarea></div>
+  <div class="field" style="margin-bottom:10px"><input id="po_img" placeholder="图片链接（可选） https://…"></div>
+  <button class="btn" id="po_go">发布动态</button></div>
+  <div id="feedList" class="stagger"></div></div>`;
+  const load=async()=>{
+    const {data:posts}=await sb.from("posts").select("*").order("created_at",{ascending:false}).limit(50);
+    if(!posts||!posts.length){ $("#feedList").innerHTML=`<div class="empty">还没有动态，来发第一条吧</div>`; return; }
+    const uids=[...new Set(posts.map(p=>p.user_id))];
+    const {data:users}=await sb.from("public_profiles").select("id,display_name,username,avatar_url").in("id",uids);
+    const umap=Object.fromEntries((users||[]).map(u=>[u.id,u]));
+    const {data:likes}=await sb.from("likes").select("post_id").eq("user_id",S.profile.id);
+    const liked=new Set((likes||[]).map(l=>l.post_id));
+    const {data:cmts}=await sb.from("comments").select("*").in("post_id",posts.map(p=>p.id)).order("created_at",{ascending:true});
+    const cmap={}; (cmts||[]).forEach(c=>{ (cmap[c.post_id]=cmap[c.post_id]||[]).push(c); });
+    const {data:likeCounts}=await sb.from("likes").select("post_id").in("post_id",posts.map(p=>p.id));
+    const lmap={}; (likeCounts||[]).forEach(l=>lmap[l.post_id]=(lmap[l.post_id]||0)+1);
+    $("#feedList").innerHTML=posts.map((p,i)=>{
+      const u=umap[p.user_id]||{display_name:"同学",avatar_url:null};
+      const cs=cmap[p.id]||[];
+      return `<div class="card pad post" style="--d:${Math.min(i*0.05,0.3)}s" data-post="${p.id}">
+        <div class="hd">${u.avatar_url?`<img src="${esc(u.avatar_url)}">`:`<img src="" style="display:none"><div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;font-weight:800;flex:none">${esc((u.display_name||"?")[0])}</div>`}
+        <div style="flex:1"><div class="nm">${esc(u.display_name||u.username||"同学")}</div><div class="tm">${timeAgo(p.created_at)}</div></div>
+        ${(isAdmin||p.user_id===S.profile.id)?`<button class="iconbtns red" data-pdel="${p.id}" style="font-size:12px;padding:7px 11px;border-radius:10px;background:var(--card2);border:1px solid rgba(248,113,113,.4);color:#fca5a5">删除</button>`:""}</div>
+        <div class="bd">${esc(p.content)}${p.image_url?`<img src="${esc(p.image_url)}" loading="lazy">`:""}</div>
+        <div class="ft"><button data-like="${p.id}" class="${liked.has(p.id)?"liked":""}">❤️ ${lmap[p.id]||""} 点赞</button><button data-cmt="${p.id}">💬 ${cs.length||""} 评论</button></div>
+        <div class="cmtbox" id="cb-${p.id}" style="display:none">${cs.map(c=>{const cu=umap[c.user_id]||{display_name:"同学"};return `<div class="cmt"><b>${esc(cu.display_name||"同学")}</b> <span style="color:var(--dim);font-size:11px">${timeAgo(c.created_at)}</span><div class="ct">${esc(c.content)}${(isAdmin||c.user_id===S.profile.id)?` <a href="javascript:void(0)" data-cdel="${c.id}" style="font-size:11px">删除</a>`:""}</div></div>`;}).join("")}
+        <div style="display:flex;gap:8px;margin-top:8px"><input id="ci-${p.id}" placeholder="写评论…" maxlength="500" style="padding:10px 13px;font-size:14px"><button class="btn sm" data-csend="${p.id}">发送</button></div></div>
+      </div>`;
+    }).join("");
+    stagger();
+    $("#feedList").querySelectorAll("[data-like]").forEach(b=>b.onclick=async()=>{
+      const pid=b.dataset.like;
+      if(liked.has(pid)){ await sb.from("likes").delete().eq("post_id",pid).eq("user_id",S.profile.id); }
+      else { await sb.from("likes").insert({post_id:pid,user_id:S.profile.id}); }
+      load();
+    });
+    $("#feedList").querySelectorAll("[data-cmt]").forEach(b=>b.onclick=()=>{ const box=$("#cb-"+b.dataset.cmt); box.style.display=box.style.display==="none"?"":"none"; });
+    $("#feedList").querySelectorAll("[data-csend]").forEach(b=>b.onclick=async()=>{
+      const pid=b.dataset.csend, inp=$("#ci-"+pid), v=inp.value.trim(); if(!v) return;
+      const {error}=await sb.from("comments").insert({post_id:pid,user_id:S.profile.id,content:v});
+      if(error) return toast("评论失败");
+      load();
+    });
+    $("#feedList").querySelectorAll("[data-cdel]").forEach(b=>b.onclick=async(e)=>{ e.preventDefault(); if(!confirm("删除这条评论？"))return; await sb.from("comments").delete().eq("id",b.dataset.cdel); load(); });
+    $("#feedList").querySelectorAll("[data-pdel]").forEach(b=>b.onclick=async()=>{ if(!confirm("删除这条动态？"))return; await sb.from("posts").delete().eq("id",b.dataset.pdel); toast("已删除"); load(); });
+  };
+  await load();
+  $("#po_go").onclick=async()=>{
+    const c=$("#po_text").value.trim(); if(!c) return toast("写点什么再发布吧");
+    const {error}=await sb.from("posts").insert({user_id:S.profile.id,content:c,image_url:$("#po_img").value.trim()||null});
+    if(error) return toast("发布失败："+error.message);
+    $("#po_text").value=""; $("#po_img").value=""; toast("已发布"); load();
+  };
+};
+
+/* ---------- 管理后台 ---------- */
+routes.admin = async function(){
+  if(!["admin","super_admin"].includes(S.profile.role)){ go("members"); return; }
+  setTab("admin");
+  const isSuper=S.profile.role==="super_admin";
+  app.innerHTML=`<div class="view">${topbar("管理后台")}
+  <div class="admintabs"><button class="chip on" data-at="users">👥 用户</button><button class="chip" data-at="content">📝 内容</button><button class="chip" data-at="site">🏫 网站</button></div>
+  <div id="adminBody"><div class="spin"></div></div></div>`;
+  const tabs={users:admUsers, content:admContent, site:admSite};
+  app.querySelectorAll("[data-at]").forEach(b=>b.onclick=()=>{ app.querySelectorAll("[data-at]").forEach(x=>x.classList.remove("on")); b.classList.add("on"); tabs[b.dataset.at](); });
+  admUsers();
+};
+function roleBadge(r,banned){ if(banned) return `<span class="rolebadge banned">已禁用</span>`; return `<span class="rolebadge ${r==="super_admin"?"super":r}">${{super_admin:"超管",admin:"管理员",member:"成员"}[r]||"成员"}</span>`; }
+async function admUsers(){
+  const isSuper=S.profile.role==="super_admin";
+  const {data}=await sb.from("profiles").select("id,username,display_name,avatar_url,role,is_banned,created_at").order("created_at",{ascending:true});
+  $("#adminBody").innerHTML=`<div class="card" style="padding:6px 16px"><div class="hint" style="padding:12px 4px 4px">共 ${data?data.length:0} 位注册用户。${isSuper?"你是超级管理员，可以任免管理员。":"普通管理员可禁用/删除成员，任免管理员请联系超管。"}</div>
+  ${(data||[]).map(u=>{const me=u.id===S.profile.id;
+    return `<div class="urow"><img src="${esc(u.avatar_url||"")}" onerror="this.style.display='none'"><div class="tx"><b>${esc(u.display_name||u.username)}${me?"（我）":""}</b><span>@${esc(u.username)} · ${fmtDate(u.created_at)}</span></div>${roleBadge(u.role,u.is_banned)}
+    ${me?"":`<div class="iconbtns">
+      ${u.is_banned?`<button data-unban="${u.id}">解禁</button>`:`<button data-ban="${u.id}">禁用</button>`}
+      ${u.role==="member"?`<button class="red" data-del="${u.id}">删除</button>`:""}
+      ${isSuper&&u.role==="member"&&!u.is_banned?`<button data-mkadmin="${u.id}">设为管理员</button>`:""}
+      ${isSuper&&u.role==="admin"?`<button data-unadmin="${u.id}">取消管理员</button>`:""}
+    </div>`}</div>`;}).join("")}</div>`;
+  const q=s=>$("#adminBody").querySelectorAll(s);
+  q("[data-ban]").forEach(b=>b.onclick=async()=>{ if(!confirm("禁用该用户？他将无法登录和被查看。"))return; await sb.from("profiles").update({is_banned:true}).eq("id",b.dataset.ban); toast("已禁用"); admUsers(); });
+  q("[data-unban]").forEach(b=>b.onclick=async()=>{ await sb.from("profiles").update({is_banned:false}).eq("id",b.dataset.unban); toast("已解禁"); admUsers(); });
+  q("[data-del]").forEach(b=>b.onclick=async()=>{ if(!confirm("彻底删除该用户及其所有数据？不可恢复！"))return; const {error}=await sb.from("profiles").delete().eq("id",b.dataset.del); if(error) return toast("删除失败："+error.message); toast("已删除"); admUsers(); });
+  q("[data-mkadmin]").forEach(b=>b.onclick=async()=>{ if(!confirm("设为管理员？"))return; const {error}=await sb.from("profiles").update({role:"admin"}).eq("id",b.dataset.mkadmin); if(error) return toast("失败："+error.message); toast("已设为管理员"); admUsers(); });
+  q("[data-unadmin]").forEach(b=>b.onclick=async()=>{ if(!confirm("取消其管理员权限？"))return; const {error}=await sb.from("profiles").update({role:"member"}).eq("id",b.dataset.unadmin); if(error) return toast("失败："+error.message); toast("已取消"); admUsers(); });
+}
+async function admContent(){
+  const {data:anns}=await sb.from("announcements").select("*").order("created_at",{ascending:false});
+  const {data:posts}=await sb.from("posts").select("id,content,created_at").order("created_at",{ascending:false}).limit(20);
+  $("#adminBody").innerHTML=`
+  <div class="secttl" style="margin-top:0">班级公告</div>
+  <div class="card pad"><div class="field"><label>标题</label><input id="an_t" maxlength="120"></div>
+  <div class="field"><label>内容</label><textarea id="an_c" maxlength="2000" style="min-height:70px"></textarea></div>
+  <button class="btn" id="an_go">发布公告</button></div>
+  ${(anns||[]).map(a=>`<div class="card pad post"><div class="hd"><div style="flex:1"><div class="nm">${esc(a.title)}</div><div class="tm">${timeAgo(a.created_at)}</div></div><button class="iconbtns red" data-adel="${a.id}" style="font-size:12px;padding:7px 11px;border-radius:10px;background:var(--card2);border:1px solid rgba(248,113,113,.4);color:#fca5a5">删除</button></div><div class="bd">${esc(a.content)}</div></div>`).join("")||'<div class="empty">暂无公告</div>'}
+  <div class="secttl">最新动态（可删除违规内容）</div>
+  ${(posts||[]).map(p=>`<div class="card pad post"><div class="bd">${esc(p.content.slice(0,120))}${p.content.length>120?"…":""}</div><div class="tm" style="font-size:12px;color:var(--dim)">${timeAgo(p.created_at)}</div><div class="iconbtns" style="margin-top:8px;justify-content:flex-start"><button class="red" data-pdel2="${p.id}">删除动态</button></div></div>`).join("")||'<div class="empty">暂无动态</div>'}
+  <div class="secttl">班级相册管理</div>
+  <div class="card pad"><div class="field"><label>新建班级相册</label><input id="ca_t" maxlength="80" placeholder="如：2026 毕业季"></div>
+  <div class="field"><select id="ca_c">${["班级日常","军训","运动会","春游","聚会","毕业","自定义"].map(c=>`<option>${c}</option>`).join("")}</select></div>
+  <button class="btn" id="ca_go">创建班级相册</button></div>
+  <div id="caList"></div>`;
+  $("#an_go").onclick=async()=>{ const t=$("#an_t").value.trim(),c=$("#an_c").value.trim(); if(!t||!c) return toast("请填写标题和内容"); const {error}=await sb.from("announcements").insert({title:t,content:c,created_by:S.profile.id}); if(error) return toast("发布失败"); toast("公告已发布"); admContent(); };
+  $("#adminBody").querySelectorAll("[data-adel]").forEach(b=>b.onclick=async()=>{ if(!confirm("删除这条公告？"))return; await sb.from("announcements").delete().eq("id",b.dataset.adel); admContent(); });
+  $("#adminBody").querySelectorAll("[data-pdel2]").forEach(b=>b.onclick=async()=>{ if(!confirm("删除这条动态？"))return; await sb.from("posts").delete().eq("id",b.dataset.pdel2); toast("已删除"); admContent(); });
+  $("#ca_go").onclick=async()=>{ const t=$("#ca_t").value.trim(); if(!t) return toast("请填写相册名"); const {error}=await sb.from("albums").insert({user_id:null,title:t,category:$("#ca_c").value}); if(error) return toast("创建失败："+error.message); toast("已创建"); admContent(); };
+  const {data:cal}=await sb.from("albums").select("id,title,category").is("user_id",null).order("created_at",{ascending:false});
+  $("#caList").innerHTML=(cal||[]).map(a=>`<div class="urow"><div class="tx"><b>${esc(a.title)}</b><span>${esc(a.category)}</span></div><div class="iconbtns"><button data-ago="${a.id}">管理照片</button><button class="red" data-adel2="${a.id}">删除</button></div></div>`).join("");
+  $("#caList").querySelectorAll("[data-ago]").forEach(b=>b.onclick=()=>go("albumview",{album:b.dataset.ago,back:"admin"}));
+  $("#caList").querySelectorAll("[data-adel2]").forEach(b=>b.onclick=async()=>{ if(!confirm("删除这个相册及全部照片？"))return; await sb.from("albums").delete().eq("id",b.dataset.adel2); admContent(); });
+}
+async function admSite(){
+  const {data:s}=await sb.from("site_settings").select("*").eq("id",1).single();
+  $("#adminBody").innerHTML=`<div class="card pad">
+  <div class="field"><label>班级名称</label><input id="s_name" value="${esc(s.class_name)}" maxlength="60"></div>
+  <div class="field"><label>班级介绍</label><input id="s_intro" value="${esc(s.class_intro)}" maxlength="120"></div>
+  <div class="field"><label>班级邀请码（留空=开放注册）</label><input id="s_code" value="${esc(s.invite_code||"")}" maxlength="40" placeholder="如：CLASS2026"></div>
+  <p class="hint">设置邀请码后，新用户注册必须填写正确的邀请码，适合只让本班同学加入。</p>
+  <button class="btn" id="s_go">保存网站设置</button></div>`;
+  $("#s_go").onclick=async()=>{
+    const {error}=await sb.from("site_settings").update({class_name:$("#s_name").value.trim()||"我们的班级",class_intro:$("#s_intro").value.trim(),invite_code:$("#s_code").value.trim()}).eq("id",1);
+    if(error) return toast("保存失败："+error.message);
+    S.site.class_name=$("#s_name").value.trim(); S.site.class_intro=$("#s_intro").value.trim(); S.site.invite_code=$("#s_code").value.trim();
+    toast("已保存"); admSite();
+  };
+}
+
+/* ---------- 启动 ---------- */
+sb.auth.onAuthStateChange(async (ev,session)=>{
+  if(ev==="SIGNED_OUT"){ S.user=null; S.profile=null; go("auth"); }
+});
+window.addEventListener("DOMContentLoaded", async ()=>{
+  applyTheme("aurora");
+  try{ const {data}=await sb.from("site_settings").select("class_name,class_intro,invite_code").eq("id",1).single(); if(data) S.site=data; }catch(e){}
+  if(SUPABASE_URL.includes("PASTE_")){
+    app.innerHTML=`<div class="view"><div class="authwrap"><div class="brandmark"><div class="logo">🔧</div><h2>还差最后一步</h2><p style="line-height:2">网站已部署，但还没接上数据库。<br>请按 README 在 Supabase 建好项目，<br>把 Project URL 和 anon key 发给管理员填入。</p></div></div></div>`;
+    return;
+  }
+  const {data:{session}} = await sb.auth.getSession();
+  if(session){ await afterAuth(); } else { go("auth"); }
+});
 </script>
 </body>
 </html>
