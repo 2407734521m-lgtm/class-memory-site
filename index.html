@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111329">
+<title>拾光 · 班级纪念馆</title>
+<style>
+:root{--bg:#0b1020;--glass:rgba(255,255,255,.085);--line:rgba(255,255,255,.15);--text:#f5f5ff;--muted:#b7bdd8;--pink:#c084fc;--blue:#60a5fa;--mint:#5eead4}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 10% 0%,#3b1d69 0,transparent 38%),radial-gradient(ellipse at 95% 15%,#123c70 0,transparent 34%),linear-gradient(145deg,#090d1c,#111329 55%,#17112a);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:radial-gradient(#fff 0.7px,transparent .7px);background-size:24px 24px}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.wrap{max-width:1120px;margin:auto;padding:20px 16px 60px;position:relative}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.04em}.logo{width:42px;height:42px;border-radius:15px;background:linear-gradient(135deg,var(--pink),var(--blue));display:grid;place-items:center;box-shadow:0 8px 30px #8b5cf655;font-size:21px}.pill,.btn{border:1px solid var(--line);border-radius:999px;padding:10px 15px;color:var(--text);background:rgba(255,255,255,.08);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}.btn.primary{border:0;background:linear-gradient(110deg,#8b5cf6,#3b82f6);font-weight:700;box-shadow:0 8px 26px #6366f144}.btn.danger{background:#7f1d1d88}.btn:disabled{opacity:.5;cursor:not-allowed}.hero{padding:34px 24px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.035));box-shadow:0 22px 80px #0003;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);overflow:hidden;position:relative}.hero:after{content:"";position:absolute;width:230px;height:230px;border-radius:50%;background:#a855f744;filter:blur(55px);right:-60px;top:-90px;pointer-events:none}.eyebrow{color:var(--mint);font-size:12px;letter-spacing:.18em;font-weight:800}.hero h1{font-size:clamp(30px,7vw,56px);line-height:1.08;margin:12px 0;background:linear-gradient(100deg,#fff,#c4b5fd 48%,#7dd3fc);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{color:var(--muted);max-width:640px;line-height:1.8;margin-bottom:20px}.actions{display:flex;flex-wrap:wrap;gap:10px}.section{margin-top:28px}.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:14px}.sectionhead h2{font-size:21px;margin:0}.sub{font-size:13px;color:var(--muted);margin-top:5px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:14px}.glass{border:1px solid var(--line);border-radius:22px;background:var(--glass);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 15px 50px #0002}.person{padding:14px;cursor:pointer;transition:transform .25s,border-color .25s,background .25s;animation:rise .5s both}.person:hover{transform:translateY(-5px);border-color:#c4b5fd88;background:rgba(255,255,255,.12)}.avatar{width:100%;aspect-ratio:1.35;object-fit:cover;border-radius:16px;background:linear-gradient(135deg,#312e81,#0e7490);display:block}.person h3{margin:13px 0 4px;font-size:17px}.person p{margin:0;color:var(--muted);font-size:13px;line-height:1.6;min-height:38px}.tag{display:inline-flex;margin-top:10px;border-radius:99px;padding:5px 9px;font-size:11px;color:#ddd6fe;background:#8b5cf622;border:1px solid #c4b5fd30}.empty{padding:28px;text-align:center;color:var(--muted)}.search{width:100%;max-width:260px}.field{display:grid;gap:7px;margin:12px 0}.field label{font-size:13px;color:#d8d9ed}.field input,.field textarea,.field select,.search input{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px 13px;background:#0b1020aa;color:var(--text);outline:none}.field textarea{min-height:90px;resize:vertical}.field input:focus,.field textarea:focus{border-color:#a78bfa;box-shadow:0 0 0 3px #8b5cf622}.muted{color:var(--muted)}.small{font-size:12px;color:var(--muted);line-height:1.6}.notice{border:1px solid #fbbf2440;background:#f59e0b12;color:#fde68a;padding:12px 14px;border-radius:14px;font-size:13px;line-height:1.6;margin:14px 0}.modal{position:fixed;inset:0;background:#050716bb;backdrop-filter:blur(10px);z-index:10;display:none;align-items:center;justify-content:center;padding:16px;overflow:auto}.modal.open{display:flex;animation:fade .2s}.dialog{width:min(720px,100%);max-height:92vh;overflow:auto;padding:22px;border-radius:26px;border:1px solid var(--line);background:linear-gradient(145deg,#1c2040f5,#111329f5);box-shadow:0 25px 100px #0008;animation:pop .28s}.dialog h2{margin:0 0 6px}.dialoghead{display:flex;justify-content:space-between;align-items:start;gap:12px}.x{border:1px solid var(--line);background:#ffffff12;color:white;border-radius:50%;width:36px;height:36px;font-size:20px}.profile-layout{display:grid;grid-template-columns:minmax(140px, .7fr) 1.3fr;gap:18px;margin-top:18px}.profile-photo{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:18px;background:#27254c}.profile-info{display:flex;flex-direction:column;gap:10px}.profile-info p{white-space:pre-wrap;line-height:1.7;color:#d4d6eb;margin:0}.checkrow{display:flex;align-items:center;gap:9px;font-size:13px;color:#d7d9ef;margin:8px 0}.checkrow input{accent-color:#a78bfa}.divider{height:1px;background:var(--line);margin:16px 0}.toast{position:fixed;bottom:18px;left:50%;transform:translate(-50%,20px);opacity:0;z-index:30;background:#202544;border:1px solid var(--line);padding:12px 16px;border-radius:14px;max-width:90vw;transition:.25s;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}.hidden{display:none!important}.footer{text-align:center;color:#8e95b8;font-size:12px;margin-top:38px}.admin-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.admin-row:last-child{border:0}@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes fade{from{opacity:0}to{opacity:1}}@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}@media(max-width:600px){.hero{padding:26px 18px}.top{align-items:flex-start}.top .actions{justify-content:flex-end}.profile-layout{grid-template-columns:1fr}.profile-photo{aspect-ratio:16/9;max-height:260px}.sectionhead{align-items:start;flex-direction:column}.search{max-width:none}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.person{padding:9px;border-radius:18px}.person h3{font-size:15px}.person p{font-size:12px}.wrap{padding-inline:12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="logo">✦</div><div>拾光 <span class="muted" style="font-weight:500">/ 班级纪念馆</span></div></div>
+    <div class="actions"><button class="btn" id="myBtn">我的主页</button><button class="btn primary" id="authBtn">登录 / 注册</button></div>
+  </header>
+  <section class="hero">
+    <div class="eyebrow">OUR LITTLE UNIVERSE · 班级记忆收藏夹</div>
+    <h1>把青春，收藏在这里。</h1>
+    <p>每个人都是故事的主角。上传照片、写下自己的小档案，定制属于你的页面，让那些共同走过的日子，在未来依然闪闪发光。</p>
+    <div class="actions"><button class="btn primary" id="joinBtn">加入我们的记忆 ↗</button><button class="btn" id="editBtn">编辑我的资料</button></div>
+  </section>
+  <div class="notice">隐私提醒：请只上传你有权分享的照片。个人资料默认仅自己可见；只有主动切换为公开后，同学才能看到你选择公开的信息。不要填写住址、手机号、密码等敏感信息。</div>
+  <section class="section">
+    <div class="sectionhead"><div><h2>同学档案</h2><div class="sub">认识每一个独一无二的你</div></div><div class="search"><input id="search" placeholder="搜索同学昵称…"></div></div>
+    <div id="people" class="grid"><div class="glass empty">正在加载同学档案…</div></div>
+  </section>
+  <section class="section" id="adminSection" hidden>
+    <div class="sectionhead"><div><h2>管理后台</h2><div class="sub">仅管理员可使用</div></div><button class="btn" id="refreshAdmin">刷新列表</button></div>
+    <div class="glass" style="padding:16px"><div id="adminList" class="muted">加载中…</div></div>
+  </section>
+  <div class="footer">拾光 · 班级纪念馆　|　愿每一段青春都有迹可循</div>
+</div>
+
+<div class="modal" id="modal"><div class="dialog"><div class="dialoghead"><div><h2 id="modalTitle">欢迎回来</h2><div class="small" id="modalSub">登录后，开始收藏班级记忆。</div></div><button class="x" id="closeModal" aria-label="关闭">×</button></div><div id="modalBody"></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* 部署前：在 Supabase 项目设置中获取 Project URL 和 anon/public key，填入下方。
+   只能使用 anon/public key，绝不能把 service_role key 放进网页。 */
+const SUPABASE_URL = "PASTE_SUPABASE_PROJECT_URL";
+const SUPABASE_ANON_KEY = "PASTE_SUPABASE_ANON_KEY";
+const configured = SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("PASTE_") && !SUPABASE_ANON_KEY.includes("PASTE_");
+const sb = configured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+let currentUser = null, ownProfile = null, publicPeople = [], currentSigned = {};
+const $ = id => document.getElementById(id);
+function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3200)}
+function openModal(title,sub,html){$("modalTitle").textContent=title;$("modalSub").textContent=sub||"";$("modalBody").innerHTML=html;$("modal").classList.add("open")}
+function closeModal(){$("modal").classList.remove("open")}
+$("closeModal").onclick=closeModal;$("modal").addEventListener("click",e=>{if(e.target===$("modal"))closeModal()});
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function fallbackPhoto(name="拾光"){const initials=(name||"拾光").slice(0,2);return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420"><defs><linearGradient id="g"><stop stop-color="#8b5cf6"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient></defs><rect width="600" height="420" rx="36" fill="url(#g)"/><circle cx="300" cy="160" r="70" fill="#ffffff" fill-opacity=".22"/><path d="M150 390 Q160 260 300 260 Q440 260 450 390" fill="#ffffff" fill-opacity=".22"/><text x="300" y="390" text-anchor="middle" font-size="34" fill="white" font-family="sans-serif">${initials}</text></svg>`)}
+async function photoUrl(path, isPublic=false){if(!path||!sb)return fallbackPhoto();if(currentSigned[path])return currentSigned[path];try{const {data,error}=await sb.storage.from("class-photos").createSignedUrl(path,3600);if(error)throw error;currentSigned[path]=data.signedUrl;return data.signedUrl}catch(e){return fallbackPhoto()}}
+async function init(){
+ if(!configured){$("people").innerHTML='<div class="glass empty" style="grid-column:1/-1">网站代码已准备好。先按 README 配置 Supabase URL、公开 anon key 并执行数据库 SQL，网站就可以开始注册登录。</div>';return}
+ const {data:{session}}=await sb.auth.getSession();currentUser=session?.user||null;
+ sb.auth.onAuthStateChange((_event,session)=>{currentUser=session?.user||null;setTimeout(refresh,0)});
+ await refresh();
+}
+async function refresh(){
+ if(!sb)return;
+ if(currentUser){const {data}=await sb.from("profiles").select("*").eq("id",currentUser.id).maybeSingle();ownProfile=data||null;$("authBtn").textContent="退出登录";$("myBtn").classList.remove("hidden");$("editBtn").textContent="编辑我的资料";if(ownProfile?.is_admin){$("adminSection").hidden=false;loadAdmin()}}else{ownProfile=null;$("authBtn").textContent="登录 / 注册";$("adminSection").hidden=true}
+ const {data,error}=await sb.from("public_profiles").select("*").order("created_at",{ascending:false}).limit(100);
+ publicPeople=data||[];if(error)console.error(error);renderPeople();
+}
+async function renderPeople(){
+ const q=$("search").value.trim().toLowerCase();const filtered=publicPeople.filter(p=>(p.display_name||"").toLowerCase().includes(q));
+ if(!filtered.length){$("people").innerHTML='<div class="glass empty" style="grid-column:1/-1">还没有公开的同学档案。登录后编辑自己的资料，并将主页设置为公开，就能出现在这里。</div>';return}
+ const urls=await Promise.all(filtered.map(p=>photoUrl(p.avatar_path,true)));
+ $("people").innerHTML=filtered.map((p,i)=>`<article class="glass person" data-id="${esc(p.id)}" style="animation-delay:${i*35}ms"><img class="avatar" src="${esc(urls[i])}" alt="个人照片" loading="lazy"><h3>${esc(p.display_name||"未命名同学")}</h3><p>${esc(p.personality||p.bio||"这个同学还没有写简介。")}</p><span class="tag">✦ 班级成员</span></article>`).join("");
+ document.querySelectorAll(".person").forEach(el=>el.onclick=()=>showPublicProfile(el.dataset.id));
+}
+$("search").addEventListener("input",renderPeople);
+$("authBtn").onclick=()=>currentUser?logout():showAuth();
+$("joinBtn").onclick=()=>currentUser?editProfile():showAuth("signup");
+$("editBtn").onclick=()=>currentUser?editProfile():showAuth();
+$("myBtn").onclick=()=>currentUser?editProfile():showAuth();
+async function logout(){await sb.auth.signOut();toast("已退出登录");await refresh()}
+function showAuth(mode="login"){
+ openModal(mode==="signup"?"创建你的班级账号":"欢迎回来","使用邮箱注册或登录。",`
+ <div class="field"><label>邮箱</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com"></div>
+ <div class="field"><label>密码（至少 8 位）</label><input id="password" type="password" autocomplete="${mode==="signup"?"new-password":"current-password"}" minlength="8" placeholder="请设置安全的密码"></div>
+ <div class="actions"><button class="btn primary" id="submitAuth">${mode==="signup"?"注册账号":"登录"}</button><button class="btn" id="switchAuth">${mode==="signup"?"已有账号？去登录":"没有账号？立即注册"}</button></div>
+ <p class="small">注册后请查看邮箱确认邮件（如果项目启用了邮箱确认）。请勿使用与其他网站相同的密码。</p>`);
+ $("submitAuth").onclick=async()=>{const email=$("email").value.trim(),password=$("password").value;if(!email||password.length<8){toast("请填写邮箱，密码至少 8 位");return}
+ let res;if(mode==="signup"){res=await sb.auth.signUp({email,password});if(!res.error&&res.data.user){toast("注册请求已提交。若启用邮箱确认，请先查看邮箱。");closeModal()}}else{res=await sb.auth.signInWithPassword({email,password});if(!res.error){closeModal();toast("登录成功")}}
+ if(res?.error)toast(res.error.message);
+ };
+ $("switchAuth").onclick=()=>showAuth(mode==="signup"?"login":"signup");
+}
+async function editProfile(){
+ if(!currentUser){showAuth();return}
+ if(!ownProfile){toast("正在初始化个人资料，请稍后再试");await refresh();return}
+ const p=ownProfile;
+ openModal("打造你的个人主页","带 * 为必填项。资料默认仅自己可见。",`
+ <div class="field"><label>昵称 / 姓名 *</label><input id="pname" maxlength="60" value="${esc(p.display_name||"")}" placeholder="你希望同学怎么称呼你"></div>
+ <div class="field"><label>年龄（可留空）</label><input id="page" type="number" min="1" max="120" value="${p.age??""}" placeholder="选填"></div>
+ <div class="field"><label>性格标签</label><input id="ppers" maxlength="120" value="${esc(p.personality||"")}" placeholder="例如：慢热、爱笑、喜欢音乐"></div>
+ <div class="field"><label>个人介绍</label><textarea id="pbio" maxlength="1000" placeholder="写下你想分享的小故事…">${esc(p.bio||"")}</textarea></div>
+ <div class="field"><label>主页风格</label><select id="ptheme"><option value="violet" ${p.theme==="violet"?"selected":""}>梦幻紫蓝</option><option value="ocean" ${p.theme==="ocean"?"selected":""}>清透海洋</option><option value="sunset" ${p.theme==="sunset"?"selected":""}>温柔日落</option></select></div>
+ <div class="field"><label>个人照片（JPG、PNG、WebP，建议小于 3MB）</label><input id="pfile" type="file" accept="image/jpeg,image/png,image/webp"></div>
+ <label class="checkrow"><input type="checkbox" id="showage" ${p.show_age?"checked":""}>公开年龄</label>
+ <label class="checkrow"><input type="checkbox" id="showpers" ${p.show_personality!==false?"checked":""}>公开性格标签</label>
+ <label class="checkrow"><input type="checkbox" id="showbio" ${p.show_bio!==false?"checked":""}>公开个人介绍</label>
+ <label class="checkrow"><input type="checkbox" id="showavatar" ${p.show_avatar!==false?"checked":""}>公开个人照片</label>
+ <label class="checkrow"><input type="checkbox" id="public" ${p.profile_visibility==="public"?"checked":""}>将我的主页公开给已登录的班级成员</label>
+ <div class="notice">为保护隐私，请不要填写家庭住址、电话号码、学校账号密码或其他敏感信息。公开主页会显示给登录的班级成员。</div>
+ <div class="actions"><button class="btn primary" id="saveProfile">保存资料</button><button class="btn" id="cancelEdit">取消</button></div>`);
+ $("cancelEdit").onclick=closeModal;
+ $("saveProfile").onclick=async()=>{
+   const name=$("pname").value.trim();if(!name){toast("请填写昵称或姓名");return}
+   const updates={display_name:name,age:$("page").value?Number($("page").value):null,personality:$("ppers").value.trim(),bio:$("pbio").value.trim(),theme:$("ptheme").value,show_age:$("showage").checked,show_personality:$("showpers").checked,show_bio:$("showbio").checked,show_avatar:$("showavatar").checked,profile_visibility:$("public").checked?"public":"private"};
+   const file=$("pfile").files[0];
+   if(file){if(file.size>3*1024*1024){toast("照片请压缩到 3MB 以内");return}if(!["image/jpeg","image/png","image/webp"].includes(file.type)){toast("仅支持 JPG、PNG、WebP 图片");return}
+     const ext=file.type==="image/png"?"png":file.type==="image/webp"?"webp":"jpg";const path=currentUser.id+"/"+crypto.randomUUID()+"."+ext;
+     const {error:upErr}=await sb.storage.from("class-photos").upload(path,file,{contentType:file.type,upsert:false});if(upErr){toast("照片上传失败："+upErr.message);return}updates.avatar_path=path;
+   }
+   const {error}=await sb.from("profiles").update(updates).eq("id",currentUser.id);
+   if(error){toast("保存失败："+error.message);return}
+   closeModal();toast("个人资料已保存");await refresh();
+ };
+}
+async function showPublicProfile(id){
+ let p=publicPeople.find(x=>x.id===id);
+ if(!p&&currentUser?.id===id)p=ownProfile;
+ if(!p)return;
+ const url=await photoUrl(p.avatar_path,true);
+ openModal(p.display_name||"同学主页","拾光 · 班级记忆",`
+ <div class="profile-layout"><img class="profile-photo" src="${esc(url)}" alt="个人照片">
+ <div class="profile-info">${p.age!=null?`<div><div class="small">年龄</div><strong>${esc(p.age)}</strong></div>`:""}${p.personality?`<div><div class="small">性格标签</div><p>${esc(p.personality)}</p></div>`:""}${p.bio?`<div><div class="small">关于我</div><p>${esc(p.bio)}</p></div>`:""}<div class="small">主页风格：${esc(({violet:"梦幻紫蓝",ocean:"清透海洋",sunset:"温柔日落"})[p.theme]||"梦幻紫蓝")}</div></div></div>
+ ${currentUser?.id===p.id?'<div class="divider"></div><button class="btn primary" id="profileEdit">编辑我的主页</button>':""}`);
+ if(currentUser?.id===p.id)$("profileEdit").onclick=editProfile;
+}
+async function loadAdmin(){
+ if(!ownProfile?.is_admin)return;
+ $("adminSection").hidden=false;$("adminList").textContent="正在加载用户…";
+ const {data,error}=await sb.from("profiles").select("id,display_name,profile_visibility,is_banned,is_admin,created_at").order("created_at",{ascending:false}).limit(100);
+ if(error){$("adminList").textContent="读取失败："+error.message;return}
+ $("adminList").innerHTML=(data||[]).map(p=>`<div class="admin-row"><div><strong>${esc(p.display_name||"未命名")}</strong><div class="small">${esc(p.id.slice(0,8))} · ${p.profile_visibility==="public"?"公开主页":"私密主页"}${p.is_admin?" · 管理员":""}</div></div><div class="actions"><button class="btn ${p.is_banned?"":"danger"}" data-ban="${esc(p.id)}" data-value="${p.is_banned?"false":"true"}">${p.is_banned?"解除限制":"限制账号"}</button></div></div>`).join("")||"还没有用户。";
+ document.querySelectorAll("[data-ban]").forEach(b=>b.onclick=async()=>{if(b.dataset.ban===currentUser.id){toast("不能在此处限制自己的账号");return}const {error}=await sb.rpc("admin_set_banned",{target_user_id:b.dataset.ban,ban_value:b.dataset.value==="true"});if(error)toast("操作失败："+error.message);else{toast("用户状态已更新");loadAdmin()}});
+}
+$("refreshAdmin").onclick=loadAdmin;
+init();
+</script>
+</body>
+</html>
