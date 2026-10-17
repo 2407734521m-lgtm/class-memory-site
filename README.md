@@ -1,67 +1,58 @@
-# 拾光 · 班级纪念馆（手机部署版）
+# 我们的班级 · 青春档案（v2 手机部署版）
 
-这是一个无需 npm 构建的静态网站起步项目：`index.html` 是网站本体，`supabase/schema.sql` 是数据库和权限规则。采用玻璃拟态渐变视觉、注册/登录、个人资料、私密照片上传、隐私开关、公开同学列表与基础管理员用户限制功能。
+无需 npm 构建的完整应用：`index.html` 是网站本体（单文件前端），`supabase/schema.sql` 是数据库、权限规则与安全视图。后端是 Supabase（真实注册登录、Postgres 数据库、行级权限），前端是 GitHub Pages 托管的静态页面。
 
-## 免费服务
-- Supabase Free：账号认证、Postgres 数据库、照片存储。免费套餐额度会变化，项目可能在一段时间不活跃后暂停；请以官方套餐页面为准。
-- Cloudflare Pages：免费托管静态网页，提供 `*.pages.dev` 网址。
-- 不需要购买域名。免费额度内可零成本试运行。
+## 功能总览
+
+- 用户名+密码注册/登录（首位注册者自动成为超级管理员），登录态保持、退出、封号拦截
+- 班级成员照片卡片墙，支持按名字/用户名/性格搜索
+- 点击成员卡片 → 照片 FLIP 共享元素过渡动画进入个人档案（500-800ms，GPU 加速，返回反向动画）
+- 个人档案：照片位置自由设计（左/右/居中/全屏背景）、7 种主题（含自定义颜色）
+- 档案字段：名字、年龄、性格、个性签名、简介、照片（链接）、爱好、联系方式、社交账号
+- 隐私设置：每个公开字段单独开关；联系方式/社交账号永不公开
+- 青春时间线：日期/标题/文字/图片/视频，按年份分组展示
+- 班级相册：分类（日常/军训/运动会/春游/聚会/毕业/自定义）、瀑布流、全屏查看（支持滑动切换）
+- 班级动态：发布文字+图片、点赞、评论、回复，管理员可删除
+- 管理后台：用户管理（查看/禁用/删除/任免管理员）、内容管理（公告/动态/评论/相册）、网站设置（班级名称/介绍/邀请码）
+- 三级权限：超级管理员 > 管理员 > 普通成员
+- 手机端优先：无横向滚动、大按钮、底部导航；桌面端三列自适应
 
 ## 第 1 步：创建 Supabase 项目
-1. 在手机浏览器打开 https://supabase.com/ 并注册。
-2. 创建一个新项目，记好数据库密码（不要发给别人）。
-3. 打开项目的 **SQL Editor**，新建查询。
-4. 打开本项目 `supabase/schema.sql`，复制全部内容粘贴进去并运行。
-5. 进入 **Project Settings → API**（或 Connect 页面），复制 **Project URL** 与 **anon/public key**。不要复制 `service_role` 或 secret key。
+
+1. 在手机浏览器打开 https://supabase.com/ ，用 GitHub 账号登录最省事。
+2. New project 新建项目：Name 填 `class-memory`，Database Password 自己设一个并记好（不要发给别人），Region 选 Northeast Asia (Tokyo)，免费计划，Create new project，等一两分钟。
+3. **关闭邮箱验证**：左侧 Authentication → Providers → Email → 把 "Confirm email" 关掉。本站用用户名+密码注册，开邮箱验证会导致无法登录。
+4. 打开项目的 **SQL Editor**，New query 新建查询。
+5. 打开本项目 `supabase/schema.sql`（或仓库页面上的同名文件），复制全部内容粘贴进去并 **Run** 运行，看到 Success 即可。如果之前跑过 v1 的 SQL，直接再跑一遍本文件即可升级。
+6. 进入 **Project Settings → API**，复制 **Project URL** 与 **anon / public key**。不要复制 `service_role` 或 secret key。
 
 ## 第 2 步：配置网站
-1. 用手机文本编辑器打开 `index.html`。
-2. 找到：
-   - `const SUPABASE_URL = "PASTE_SUPABASE_PROJECT_URL";`
-   - `const SUPABASE_ANON_KEY = "PASTE_SUPABASE_ANON_KEY";`
-3. 将两个占位内容分别替换为你的 Project URL 与 anon/public key，保留引号。
-4. 保存文件。不要把数据库密码、service_role key、邮箱密码放进 HTML。
 
-## 第 3 步：创建首个管理员
-1. 先通过网站注册你自己的账号并完成邮箱验证（如果开启）。
-2. 在 Supabase 打开 **Authentication → Users**，找到自己的用户 UUID。
-3. 回到 SQL Editor，运行下面的语句，把 UUID 替换成自己的真实 UUID：
+网站里的两个占位符需要填上才能连上数据库：
 
-```sql
-update public.profiles
-set is_admin = true
-where id = '把你的用户UUID粘贴在这里';
-```
+- `const SUPABASE_URL = "PASTE_SUPABASE_PROJECT_URL";`
+- `const SUPABASE_ANON_KEY = "PASTE_SUPABASE_ANON_KEY";`
 
-管理员角色只能由数据库管理者设置，不允许普通用户在网页上自行提权。不要把管理员账号借给别人。
+把 Project URL 和 anon key 发给管理员（就是我），我来填好重新部署。anon key 设计上就是公开的（本来就要嵌在网页里），直接贴聊天里就行。
 
-## 第 4 步：部署到 Cloudflare Pages（手机浏览器）
-1. 打开 https://dash.cloudflare.com/ 并注册/登录。
-2. 进入 **Workers & Pages**，选择创建应用/Pages，并选择 **Direct Upload / Drag and drop**（界面名称可能变化）。
-3. 本项目部署时只需要上传网站文件 `index.html`。如果页面只接受 ZIP，可创建一个仅包含 `index.html` 的 ZIP 文件并上传；不要把 README 或 SQL 文件当网站首页。
-4. 部署成功后会得到 `https://你的项目名.pages.dev` 形式的网址。
-5. 用手机无痕窗口打开网址，测试注册、邮箱确认、登录、编辑资料、公开主页和照片上传。
+## 第 3 步：成为超级管理员
 
-官方说明：https://developers.cloudflare.com/pages/get-started/direct-upload/
+1. 打开网站，注册第一个账号（用户名+密码）。**第一位注册的同学会自动成为超级管理员**。
+2. 超管登录后，底部导航会出现「管理」入口，可以任免管理员、禁用用户、管理公告/相册/动态、设置班级邀请码。
 
-## 第 5 步：配置 Supabase Auth
-1. Supabase → Authentication → URL Configuration。
-2. 把 Cloudflare 的公开网址添加为 Site URL / Redirect URL（按控制台提示填写）。
-3. 测试注册邮件。如果收不到邮件，检查垃圾邮件；公开使用前应配置好邮箱验证与邮件发送设置。
+## 第 4 步：Supabase Auth 跳转配置（可选）
 
-## 当前功能
-- 邮箱注册和登录；登录态同步。
-- 个人资料：昵称、年龄、性格、个人介绍、主题风格。
-- 个人主页公开/私密切换，以及年龄、性格、介绍、头像逐项公开设置。
-- 私有 Storage 桶；照片按账号 UUID 路径上传，使用限时签名链接显示。
-- 同学公开档案卡片、搜索、弹窗个人资料动画。
-- 管理员可查看用户列表并通过安全 RPC 限制/解除限制账号。
-- 数据库 RLS、公开资料安全视图、图片访问策略。
+本站使用用户名+密码（内部映射合成邮箱），不依赖邮件验证，此步可跳过。如需开启邮箱相关功能，再去 Authentication → URL Configuration 把网站地址加为 Site URL / Redirect URL。
+
+## 部署
+
+- 本仓库已开启 GitHub Pages，`index.html` 在 main 分支根目录即自动上线：https://2407734521m-lgtm.github.io/class-memory-site/
+- 每次更新 `index.html` 后推送到 main 分支，1-2 分钟自动重新部署。
 
 ## 重要限制与上线前检查
-- 这是可运行的初始版本，不是经过第三方安全审计的正式产品。先用测试账号验证，确认 SQL 全部成功后再邀请同学。
-- 首版管理员可以查看用户列表并限制账号，但尚未实现完整的举报工单、公告发布、批量审核或个人主页布局编辑器。
-- 页面当前只显示个人头像照片；照片墙/多张相册可作为下一版扩展。
-- 个人资料默认私密；公开资料只允许登录用户查看。不要把学生敏感信息、家庭住址、电话号码等上传。
-- 免费服务的额度、暂停规则、可用区域可能变化。查看 https://supabase.com/pricing 与 Cloudflare 官方文档。
-- 如果 SQL 运行失败，不要反复运行不清楚的修改语句；先保存错误信息并排查。
+
+- 这是可运行的版本，不是经过第三方安全审计的正式产品。先用测试账号走完注册→建档→发动态→管理后台全流程，确认 SQL 全部成功后再邀请同学。
+- 字段级隐私通过 `public_profiles` 安全视图 + 应用层共同保证；联系方式/社交账号从不进入公开视图。
+- 照片目前只支持图片链接（图床直链）。本地上传/云存储为后续扩展。
+- 不要把学生敏感信息、家庭住址、电话号码等上传到公开字段。
+- 免费服务的额度、暂停规则、可用区域可能变化，以 https://supabase.com/pricing 与 GitHub Pages 官方文档为准。
