@@ -281,7 +281,8 @@ if(!window.supabase){document.addEventListener("DOMContentLoaded",()=>{document.
 /* ================= 拾光 · 青春档案 v2 ================= */
 const SUPABASE_URL = "PASTE_SUPABASE_PROJECT_URL";
 const SUPABASE_ANON_KEY = "PASTE_SUPABASE_ANON_KEY";
-const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let sb = null;
+try{ sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); }catch(e){ sb = null; /* 占位符/无效网址时不建客户端，显示配置引导页 */ }
 
 /* ---------- 工具 ---------- */
 const $ = s => document.querySelector(s);
@@ -910,16 +911,16 @@ async function admSite(){
 }
 
 /* ---------- 启动 ---------- */
-sb.auth.onAuthStateChange(async (ev,session)=>{
+if(sb){ sb.auth.onAuthStateChange(async (ev,session)=>{
   if(ev==="SIGNED_OUT"){ S.user=null; S.profile=null; go("auth"); }
-});
+});}
 window.addEventListener("DOMContentLoaded", async ()=>{
   applyTheme("aurora");
-  try{ const {data}=await sb.from("site_settings").select("class_name,class_intro,invite_code").eq("id",1).single(); if(data) S.site=data; }catch(e){}
-  if(SUPABASE_URL.includes("PASTE_")){
+  if(!sb){
     app.innerHTML=`<div class="view"><div class="authwrap"><div class="brandmark"><div class="logo">🔧</div><h2>还差最后一步</h2><p style="line-height:2">网站已部署，但还没接上数据库。<br>请按 README 在 Supabase 建好项目，<br>把 Project URL 和 anon key 发给管理员填入。</p></div></div></div>`;
     return;
   }
+  try{ const {data}=await sb.from("site_settings").select("class_name,class_intro,invite_code").eq("id",1).single(); if(data) S.site=data; }catch(e){}
   const {data:{session}} = await sb.auth.getSession();
   if(session){ await afterAuth(); } else { go("auth"); }
 });
