@@ -64,8 +64,16 @@ drop policy if exists "profiles_update_own" on public.profiles;
 drop policy if exists "profiles_admin_all" on public.profiles;
 create policy "profiles_select_own" on public.profiles for select using (auth.uid() = id);
 create policy "profiles_select_public" on public.profiles for select using (profile_visibility = 'public' and is_banned = false);
-create policy "profiles_insert_own" on public.profiles for insert with check (auth.uid() = id);
-create policy "profiles_update_own" on public.profiles for update using (auth.uid() = id) with check (auth.uid() = id);
+-- 普通用户新建/修改自己的档案时，不允许自封管理员或给自己解封（防提权）
+create policy "profiles_insert_own" on public.profiles for insert with check (
+  auth.uid() = id and role = 'member'
+  and coalesce(is_admin, false) = false and coalesce(is_banned, false) = false);
+create policy "profiles_update_own" on public.profiles for update
+  using (auth.uid() = id)
+  with check (auth.uid() = id
+    and role = (select p.role from public.profiles p where p.id = auth.uid())
+    and coalesce(is_admin, false) = (select coalesce(p.is_admin, false) from public.profiles p where p.id = auth.uid())
+    and coalesce(is_banned, false) = (select coalesce(p.is_banned, false) from public.profiles p where p.id = auth.uid()));
 -- 管理员可以看全部、禁用用户；只有超管能改 role
 create policy "profiles_admin_select" on public.profiles for select using (
   exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('admin','super_admin')));
@@ -192,10 +200,16 @@ create policy "posts_read" on public.posts for select using (auth.uid() is not n
 create policy "posts_write_own" on public.posts for all using (user_id = auth.uid()) with check (user_id = auth.uid());
 create policy "posts_admin_delete" on public.posts for delete using (
   exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('admin','super_admin')));
-create policy "comments_all_auth" on public.comments for all using (auth.uid() is not null) with check (user_id = auth.uid());
+-- 评论：只能看全部、写自己的、改自己的、删自己的（管理员删任意见下面）
+create policy "comments_select_auth" on public.comments for select using (auth.uid() is not null);
+create policy "comments_insert_own" on public.comments for insert with check (user_id = auth.uid());
+create policy "comments_update_own" on public.comments for update using (user_id = auth.uid()) with check (user_id = auth.uid());
+create policy "comments_delete_own" on public.comments for delete using (user_id = auth.uid());
 create policy "comments_admin_delete" on public.comments for delete using (
   exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('admin','super_admin')));
-create policy "likes_all_auth" on public.likes for all using (auth.uid() is not null) with check (user_id = auth.uid());
+create policy "likes_select_auth" on public.likes for select using (auth.uid() is not null);
+create policy "likes_insert_own" on public.likes for insert with check (user_id = auth.uid());
+create policy "likes_delete_own" on public.likes for delete using (user_id = auth.uid());
 
 -- ============ 公告与站点设置 ============
 create table if not exists public.announcements (
