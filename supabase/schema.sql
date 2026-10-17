@@ -1,144 +1,237 @@
--- 拾光班级纪念馆 Supabase 数据库初始化
+-- 拾光 · 青春档案 v2 数据库初始化
 -- 在 Supabase Dashboard -> SQL Editor 中完整运行一次。
--- 此脚本会创建 profiles、public_profiles 视图和私有照片桶。
--- 只在网页中使用 Project URL + anon/public key，绝不使用 service_role key。
+-- 幂等设计：如果之前跑过 v1 的 schema.sql，直接再跑一遍本文件即可升级。
+-- 网页中只使用 Project URL + anon/public key，绝不使用 service_role key。
+-- 注意：Supabase -> Authentication -> Providers -> Email 里请关闭 "Confirm email"，
+-- 本站使用用户名+密码注册（内部映射为合成邮箱），开邮箱验证会导致无法登录。
 
 create extension if not exists pgcrypto;
 
+-- ============ 用户档案 ============
 create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
+  username text not null default '' check (char_length(username) <= 24),
   display_name text not null default '新同学' check (char_length(display_name) <= 60),
   age int check (age is null or (age between 1 and 120)),
   personality text not null default '' check (char_length(personality) <= 120),
-  bio text not null default '' check (char_length(bio) <= 1000),
-  avatar_path text,
-  profile_visibility text not null default 'private' check (profile_visibility in ('private','public')),
-  show_age boolean not null default false,
-  show_personality boolean not null default true,
-  show_bio boolean not null default true,
-  show_avatar boolean not null default true,
-  theme text not null default 'violet' check (theme in ('violet','ocean','sunset')),
+  signature text not null default '' check (char_length(signature) <= 200),
+  bio text not null default '' check (char_length(bio) <= 2000),
+  avatar_url text,
+  hobbies text not null default '' check (char_length(hobbies) <= 500),
+  contact text not null default '',
+  social text not null default '',
+  photo_layout text not null default 'center' check (photo_layout in ('left','right','center','cover')),
+  theme text not null default 'aurora' check (theme in ('aurora','sunset','forest','mono','starry','ocean','custom')),
+  theme_color text not null default '#a78bfa',
+  role text not null default 'member' check (role in ('member','admin','super_admin')),
   is_admin boolean not null default false,
   is_banned boolean not null default false,
+  profile_visibility text not null default 'public' check (profile_visibility in ('private','public')),
+  show_name boolean not null default true,
+  show_age boolean not null default true,
+  show_personality boolean not null default true,
+  show_signature boolean not null default true,
+  show_bio boolean not null default true,
+  show_avatar boolean not null default true,
+  show_hobbies boolean not null default true,
   created_at timestamptz not null default now()
 );
 
+-- v1 升级补列
+alter table public.profiles add column if not exists username text not null default '';
+alter table public.profiles add column if not exists signature text not null default '';
+alter table public.profiles add column if not exists hobbies text not null default '';
+alter table public.profiles add column if not exists contact text not null default '';
+alter table public.profiles add column if not exists social text not null default '';
+alter table public.profiles add column if not exists photo_layout text not null default 'center';
+alter table public.profiles add column if not exists theme text not null default 'aurora';
+alter table public.profiles add column if not exists theme_color text not null default '#a78bfa';
+alter table public.profiles add column if not exists role text not null default 'member';
+alter table public.profiles add column if not exists show_name boolean not null default true;
+alter table public.profiles add column if not exists show_signature boolean not null default true;
+alter table public.profiles add column if not exists show_hobbies boolean not null default true;
+do $$ begin
+  alter table public.profiles add constraint profiles_username_unique unique (username);
+exception when duplicate_object then null; end $$;
+-- v1 的 is_admin 迁移到 role
+update public.profiles set role = 'admin' where is_admin = true and role = 'member';
+
 alter table public.profiles enable row level security;
+drop policy if exists "profiles_select_own" on public.profiles;
+drop policy if exists "profiles_select_public" on public.profiles;
+drop policy if exists "profiles_insert_own" on public.profiles;
+drop policy if exists "profiles_update_own" on public.profiles;
+drop policy if exists "profiles_admin_all" on public.profiles;
+create policy "profiles_select_own" on public.profiles for select using (auth.uid() = id);
+create policy "profiles_select_public" on public.profiles for select using (profile_visibility = 'public' and is_banned = false);
+create policy "profiles_insert_own" on public.profiles for insert with check (auth.uid() = id);
+create policy "profiles_update_own" on public.profiles for update using (auth.uid() = id) with check (auth.uid() = id);
+-- 管理员可以看全部、禁用用户；只有超管能改 role
+create policy "profiles_admin_select" on public.profiles for select using (
+  exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('admin','super_admin')));
+create policy "profiles_admin_ban" on public.profiles for update using (
+  exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('admin','super_admin')))
+  with check (role = (select role from public.profiles where id = public.profiles.id));
+create policy "profiles_superadmin_role" on public.profiles for update using (
+  exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'super_admin'));
+create policy "profiles_admin_delete" on public.profiles for delete using (
+  exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('admin','super_admin'))
+  and (select role from public.profiles where id = public.profiles.id) = 'member');
 
-create or replace function public.is_admin()
-returns boolean language sql stable security definer
-set search_path = public
-as $$ select exists(select 1 from public.profiles p where p.id = auth.uid() and p.is_admin = true and p.is_banned = false); $$;
-
--- 用户可读取自己的完整资料；管理员可读取全部资料。普通用户只能通过 public_profiles 视图看公开字段。
-drop policy if exists "profiles_select_self_or_admin" on public.profiles;
-create policy "profiles_select_self_or_admin" on public.profiles
-for select to authenticated using (id = auth.uid() or public.is_admin());
-
-drop policy if exists "profiles_insert_self" on public.profiles;
-create policy "profiles_insert_self" on public.profiles
-for insert to authenticated with check (id = auth.uid() and is_admin = false and is_banned = false);
-
-drop policy if exists "profiles_update_self" on public.profiles;
-create policy "profiles_update_self" on public.profiles
-for update to authenticated
-using (id = auth.uid() and is_banned = false)
-with check (id = auth.uid() and is_admin = false and is_banned = false);
-
--- 安全视图：对外只显示公开主页，隐藏字段在数据库查询结果中即为 NULL。
--- 视图由表所有者执行，因此必须保持字段清单精简并用 CASE 明确过滤每项隐私字段。
-create or replace view public.public_profiles
-with (security_barrier = true)
-as
+-- 公开资料安全视图：字段级隐私在这里真正生效（联系方式/社交账号永不进视图）
+create or replace view public.public_profiles as
 select
-  p.id,
-  p.display_name,
-  case when p.show_age then p.age else null end as age,
-  case when p.show_personality then p.personality else null end as personality,
-  case when p.show_bio then p.bio else null end as bio,
-  case when p.show_avatar then p.avatar_path else null end as avatar_path,
-  p.theme,
-  p.created_at
-from public.profiles p
-where p.profile_visibility = 'public'
-  and p.is_banned = false;
+  id,
+  username,
+  case when show_name then display_name end as display_name,
+  case when show_age then age end as age,
+  case when show_personality then personality end as personality,
+  case when show_signature then signature end as signature,
+  case when show_bio then bio end as bio,
+  case when show_avatar then avatar_url end as avatar_url,
+  case when show_hobbies then hobbies end as hobbies,
+  photo_layout, theme, theme_color, role, created_at
+from public.profiles
+where profile_visibility = 'public' and is_banned = false;
 
-grant select on public.public_profiles to authenticated;
-
--- 仅管理员可以通过 RPC 修改封禁状态；普通用户不能直接修改 is_admin / is_banned。
-create or replace function public.admin_set_banned(target_user_id uuid, ban_value boolean)
-returns void language plpgsql security definer
-set search_path = public
-as $$
+-- 首个注册用户自动成为超管（仅当全站还没有超管时）
+create or replace function public.claim_super_admin()
+returns void language plpgsql security definer set search_path = public as $$
 begin
-  if not public.is_admin() then
-    raise exception '管理员权限不足';
+  if not exists (select 1 from public.profiles where role = 'super_admin') then
+    update public.profiles set role = 'super_admin' where id = auth.uid();
   end if;
-  if target_user_id = auth.uid() then
-    raise exception '不能限制自己的账号';
-  end if;
-  update public.profiles set is_banned = ban_value where id = target_user_id;
-end;
-$$;
-revoke all on function public.admin_set_banned(uuid, boolean) from public;
-grant execute on function public.admin_set_banned(uuid, boolean) to authenticated;
+end $$;
 
--- 私有照片桶。文件路径必须为 用户UUID/文件名。
-insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
-values ('class-photos', 'class-photos', false, 3145728, array['image/jpeg','image/png','image/webp'])
-on conflict (id) do update set public = false, file_size_limit = 3145728, allowed_mime_types = array['image/jpeg','image/png','image/webp'];
-
-drop policy if exists "photo_upload_own_folder" on storage.objects;
-create policy "photo_upload_own_folder" on storage.objects
-for insert to authenticated
-with check (bucket_id = 'class-photos' and (storage.foldername(name))[1] = auth.uid()::text);
-
-drop policy if exists "photo_update_own_folder" on storage.objects;
-create policy "photo_update_own_folder" on storage.objects
-for update to authenticated
-using (bucket_id = 'class-photos' and (storage.foldername(name))[1] = auth.uid()::text)
-with check (bucket_id = 'class-photos' and (storage.foldername(name))[1] = auth.uid()::text);
-
-drop policy if exists "photo_delete_own_folder" on storage.objects;
-create policy "photo_delete_own_folder" on storage.objects
-for delete to authenticated
-using (bucket_id = 'class-photos' and ((storage.foldername(name))[1] = auth.uid()::text or public.is_admin()));
-
-drop policy if exists "photo_read_allowed_profiles" on storage.objects;
-create policy "photo_read_allowed_profiles" on storage.objects
-for select to authenticated
-using (
-  bucket_id = 'class-photos' and (
-    (storage.foldername(name))[1] = auth.uid()::text
-    or public.is_admin()
-    or exists (
-      select 1 from public.public_profiles pp
-      where pp.id::text = (storage.foldername(name))[1]
-        and pp.avatar_path = name
-    )
-  )
+-- ============ 青春时间线 ============
+create table if not exists public.timeline_events (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references public.profiles(id) on delete cascade,
+  event_date date not null,
+  title text not null check (char_length(title) <= 120),
+  text text not null default '' check (char_length(text) <= 2000),
+  image_url text,
+  video_url text,
+  created_at timestamptz not null default now()
 );
+alter table public.timeline_events enable row level security;
+drop policy if exists "timeline_read" on public.timeline_events;
+drop policy if exists "timeline_write_own" on public.timeline_events;
+drop policy if exists "timeline_admin_delete" on public.timeline_events;
+create policy "timeline_read" on public.timeline_events for select using (
+  user_id = auth.uid() or exists (
+    select 1 from public.profiles p where p.id = timeline_events.user_id
+    and p.profile_visibility = 'public' and p.is_banned = false));
+create policy "timeline_write_own" on public.timeline_events for all using (user_id = auth.uid()) with check (user_id = auth.uid());
+create policy "timeline_admin_delete" on public.timeline_events for delete using (
+  exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('admin','super_admin')));
 
--- 注册后自动建立个人资料行。
-create or replace function public.handle_new_user()
-returns trigger language plpgsql security definer
-set search_path = public
-as $$
-begin
-  insert into public.profiles(id, display_name, profile_visibility)
-  values (new.id, '新同学', 'private')
-  on conflict (id) do nothing;
-  return new;
-end;
-$$;
+-- ============ 班级相册 ============
+create table if not exists public.albums (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references public.profiles(id) on delete cascade,
+  title text not null check (char_length(title) <= 80),
+  category text not null default '班级日常' check (char_length(category) <= 40),
+  cover_url text,
+  created_at timestamptz not null default now()
+);
+create table if not exists public.album_photos (
+  id uuid primary key default gen_random_uuid(),
+  album_id uuid not null references public.albums(id) on delete cascade,
+  image_url text not null,
+  caption text not null default '' check (char_length(caption) <= 200),
+  created_at timestamptz not null default now()
+);
+alter table public.albums enable row level security;
+alter table public.album_photos enable row level security;
+drop policy if exists "albums_read" on public.albums;
+drop policy if exists "albums_write_own" on public.albums;
+drop policy if exists "albums_admin" on public.albums;
+drop policy if exists "aphotos_read" on public.album_photos;
+drop policy if exists "aphotos_write" on public.album_photos;
+create policy "albums_read" on public.albums for select using (true);
+create policy "albums_write_own" on public.albums for all using (user_id = auth.uid()) with check (user_id = auth.uid());
+create policy "albums_admin" on public.albums for all using (
+  exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('admin','super_admin')));
+create policy "aphotos_read" on public.album_photos for select using (true);
+create policy "aphotos_write" on public.album_photos for all using (
+  exists (select 1 from public.albums a where a.id = album_photos.album_id and (a.user_id = auth.uid()
+    or exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('admin','super_admin')))));
 
-drop trigger if exists on_auth_user_created on auth.users;
-create trigger on_auth_user_created
-after insert on auth.users
-for each row execute procedure public.handle_new_user();
+-- ============ 班级动态 ============
+create table if not exists public.posts (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references public.profiles(id) on delete cascade,
+  content text not null check (char_length(content) <= 2000),
+  image_url text,
+  created_at timestamptz not null default now()
+);
+create table if not exists public.comments (
+  id uuid primary key default gen_random_uuid(),
+  post_id uuid not null references public.posts(id) on delete cascade,
+  user_id uuid not null references public.profiles(id) on delete cascade,
+  content text not null check (char_length(content) <= 500),
+  created_at timestamptz not null default now()
+);
+create table if not exists public.likes (
+  post_id uuid not null references public.posts(id) on delete cascade,
+  user_id uuid not null references public.profiles(id) on delete cascade,
+  created_at timestamptz not null default now(),
+  primary key (post_id, user_id)
+);
+alter table public.posts enable row level security;
+alter table public.comments enable row level security;
+alter table public.likes enable row level security;
+drop policy if exists "posts_read" on public.posts;
+drop policy if exists "posts_write_own" on public.posts;
+drop policy if exists "posts_admin_delete" on public.posts;
+drop policy if exists "comments_all_auth" on public.comments;
+drop policy if exists "comments_admin_delete" on public.comments;
+drop policy if exists "likes_all_auth" on public.likes;
+create policy "posts_read" on public.posts for select using (auth.uid() is not null);
+create policy "posts_write_own" on public.posts for all using (user_id = auth.uid()) with check (user_id = auth.uid());
+create policy "posts_admin_delete" on public.posts for delete using (
+  exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('admin','super_admin')));
+create policy "comments_all_auth" on public.comments for all using (auth.uid() is not null) with check (user_id = auth.uid());
+create policy "comments_admin_delete" on public.comments for delete using (
+  exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('admin','super_admin')));
+create policy "likes_all_auth" on public.likes for all using (auth.uid() is not null) with check (user_id = auth.uid());
 
--- 为普通用户明确限制可更新的字段。管理员状态仅由 SQL 编辑器/可信管理流程赋予。
-revoke update on public.profiles from authenticated;
-grant update (display_name, age, personality, bio, avatar_path, profile_visibility,
-              show_age, show_personality, show_bio, show_avatar, theme)
-on public.profiles to authenticated;
+-- ============ 公告与站点设置 ============
+create table if not exists public.announcements (
+  id uuid primary key default gen_random_uuid(),
+  title text not null check (char_length(title) <= 120),
+  content text not null check (char_length(content) <= 2000),
+  created_by uuid references public.profiles(id) on delete set null,
+  created_at timestamptz not null default now()
+);
+create table if not exists public.site_settings (
+  id int primary key default 1 check (id = 1),
+  class_name text not null default '我们的班级',
+  class_intro text not null default '青春档案 · 拾光纪念馆',
+  bg_style text not null default 'aurora',
+  invite_code text not null default ''
+);
+insert into public.site_settings (id) values (1) on conflict (id) do nothing;
+alter table public.announcements enable row level security;
+alter table public.site_settings enable row level security;
+drop policy if exists "ann_read" on public.announcements;
+drop policy if exists "ann_admin" on public.announcements;
+drop policy if exists "site_read" on public.site_settings;
+drop policy if exists "site_admin" on public.site_settings;
+create policy "ann_read" on public.announcements for select using (auth.uid() is not null);
+create policy "ann_admin" on public.announcements for all using (
+  exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('admin','super_admin')));
+create policy "site_read" on public.site_settings for select using (true);
+create policy "site_admin" on public.site_settings for update using (
+  exists (select 1 from public.profiles p where p.id = auth.uid() and p.role in ('admin','super_admin')));
+
+-- ============ 照片存储桶（可选，v2 照片以 URL 为主） ============
+insert into storage.buckets (id, name, public) values ('avatars','avatars', false)
+on conflict (id) do nothing;
+drop policy if exists "avatars_own_write" on storage.objects;
+drop policy if exists "avatars_owner_read" on storage.objects;
+create policy "avatars_own_write" on storage.objects for insert with check (
+  bucket_id = 'avatars' and (storage.foldername(name))[1] = auth.uid()::text);
+create policy "avatars_owner_read" on storage.objects for select using (
+  bucket_id = 'avatars' and (storage.foldername(name))[1] = auth.uid()::text);
