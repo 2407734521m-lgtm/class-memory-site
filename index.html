@@ -256,8 +256,10 @@ a{color:var(--acc)}
 <nav class="tabbar" id="tabbar" style="display:none"></nav>
 <div id="toast"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>if(!window.supabase){document.write('<script src="https://unpkg.com/@supabase/supabase-js@2"><\/script>')}</script>
 <script>
 "use strict";
+if(!window.supabase){document.addEventListener("DOMContentLoaded",()=>{document.getElementById("app").innerHTML='<div class="view"><div class="authwrap"><div class="brandmark"><div class="logo">📡</div><h2>网络连接异常</h2><p style="line-height:2">页面核心组件加载失败，可能是网络或 VPN 拦截了 CDN。<br>请关闭 VPN 后刷新，或换个网络再试。</p><button class="btn" onclick="location.reload()">重新加载</button></div></div></div>'});throw new Error("supabase CDN failed");}
 /* ================= 拾光 · 青春档案 v2 ================= */
 const SUPABASE_URL = "PASTE_SUPABASE_PROJECT_URL";
 const SUPABASE_ANON_KEY = "PASTE_SUPABASE_ANON_KEY";
